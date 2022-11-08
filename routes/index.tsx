@@ -39,7 +39,7 @@ export const handler: Handlers<HomeData> = {
     const shows = await fetchTracklists();
 
     return ctx.render({
-      ["api/shows"]: shows ?? undefined,
+      ["/api/shows"]: shows ?? undefined,
     });
   },
 };
