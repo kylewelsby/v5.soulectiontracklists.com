@@ -3,5 +3,4 @@
 import dev from "$fresh/dev.ts";
 import "https://deno.land/std@0.145.0/dotenv/load.ts";
 
-
 await dev(import.meta.url, "./main.ts");

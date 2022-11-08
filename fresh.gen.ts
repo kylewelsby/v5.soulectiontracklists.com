@@ -3,19 +3,27 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import config from "./deno.json" assert { type: "json" };
-import * as $0 from "./routes/[name].tsx";
-import * as $1 from "./routes/api/joke.ts";
-import * as $2 from "./routes/index.tsx";
-import * as $$0 from "./islands/Counter.tsx";
+import * as $0 from "./routes/_app.tsx";
+import * as $1 from "./routes/api/shows/[slug].ts";
+import * as $2 from "./routes/api/shows/index.ts";
+import * as $3 from "./routes/index.tsx";
+import * as $4 from "./routes/tracklists/[slug].tsx";
+import * as $$0 from "./islands/MusicRoutes.tsx";
+import * as $$1 from "./islands/PlayShow.tsx";
+import * as $$2 from "./islands/PlayerWidget.tsx";
 
 const manifest = {
   routes: {
-    "./routes/[name].tsx": $0,
-    "./routes/api/joke.ts": $1,
-    "./routes/index.tsx": $2,
+    "./routes/_app.tsx": $0,
+    "./routes/api/shows/[slug].ts": $1,
+    "./routes/api/shows/index.ts": $2,
+    "./routes/index.tsx": $3,
+    "./routes/tracklists/[slug].tsx": $4,
   },
   islands: {
-    "./islands/Counter.tsx": $$0,
+    "./islands/MusicRoutes.tsx": $$0,
+    "./islands/PlayShow.tsx": $$1,
+    "./islands/PlayerWidget.tsx": $$2,
   },
   baseUrl: import.meta.url,
   config,

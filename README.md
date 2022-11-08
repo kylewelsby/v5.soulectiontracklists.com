@@ -13,5 +13,4 @@ deno task start
 
 This will watch the project directory and restart as necessary.
 
-
 [fresh docs](https://fresh.deno.dev/docs/introduction)

@@ -1,0 +1,8 @@
+img {
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity 1s linear;
+}
+img.twic-done {
+  opacity: 1;
+}
