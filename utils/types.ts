@@ -19,9 +19,7 @@ export type Show = {
   slug: string;
   links: string;
   data: string;
-  media: {
-    [key: string]: string;
-  };
+  media: ShowLinks;
 };
 
 export interface PreloadData {
