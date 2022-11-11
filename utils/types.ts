@@ -1,5 +1,12 @@
 export interface List<T> {
-  edges: [T];
+  edges: [Node<T>];
+  pageInfo: PageInfo;
+}
+export interface PageInfo {
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
+  endCursor: string;
+  startCursor: string;
 }
 
 export interface ShowLinks {
@@ -8,9 +15,12 @@ export interface ShowLinks {
   mixcloud: string;
 }
 
-export interface ShowNode {
-  node: Show;
+export interface Node<T> {
+  node: T;
+  cursor: string;
 }
+
+
 
 export type Show = {
   title: string;
@@ -20,7 +30,36 @@ export type Show = {
   links: string;
   data: string;
   media: ShowLinks;
+  chaptersCollection: List<Chapter>;
+  chapters: [Chapter];
 };
+
+export type Chapter = {
+  id: string;
+  title: string;
+  markersCollection: List<Marker>;
+  markers: [Marker?];
+}
+
+export type Marker = {
+  timestamp: number;
+  position: number;
+  tracks?: Track;
+  rawTrack: string;
+}
+
+export type Track = {
+  id: string;
+  title: string;
+  slug: string;
+  artists: Artist;
+}
+
+export type Artist = {
+  id: string;
+  title: string;
+  slug: string;
+}
 
 export interface PreloadData {
   readonly [key: string]:
