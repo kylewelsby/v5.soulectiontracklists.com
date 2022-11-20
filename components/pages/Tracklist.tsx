@@ -32,9 +32,7 @@ export default function Tracklist({ slug }: TracklistProps) {
     <div>
       <a href="/">Go Back</a>
       <h1>{show.value.title}</h1>
-      {show.value!.chapters.map((chapter) => (
-        <ChapterRow chapter={chapter}/>
-      ))}
+      {show.value!.chapters.map((chapter) => <ChapterRow chapter={chapter} />)}
       <div onClick={onPlay}>
         Play Show
       </div>

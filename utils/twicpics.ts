@@ -1,2 +1,2 @@
-import { TwicImg } from "https://esm.sh/v96/@twicpics/components@0.12.0/react";
+import { TwicImg } from "@twicpics/components";
 export { TwicImg };

@@ -1,4 +1,5 @@
-import MarkerRow from "@/components/show/MarkerRow.tsx"
+import ChapterHero from "@/components/show/ChapterHero.tsx";
+import MarkerRow from "@/components/show/MarkerRow.tsx";
 import { Chapter } from "@/utils/types.ts";
 
 interface ChapterProps {
@@ -8,10 +9,10 @@ interface ChapterProps {
 export default function ChapterRow({ chapter }: ChapterProps) {
   return (
     <div>
-      {chapter.title}
-      {chapter.markers.map((marker) => (
-        <MarkerRow marker={marker} />
-      ))}
+      <ChapterHero chapter={chapter} />
+      <div>
+        {chapter.markers.map((marker) => <MarkerRow marker={marker!} />)}
+      </div>
     </div>
   );
 }

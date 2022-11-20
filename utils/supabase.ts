@@ -1,3 +1,5 @@
+import { createClient } from "@supabase/supabase-js";
+
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
 const SUPABASE_KEY = Deno.env.get("SUPABASE_KEY");
 
@@ -28,3 +30,5 @@ export async function graphql<T>(
   }
   return json.data as T;
 }
+
+export const supabase = createClient(SUPABASE_URL!, SUPABASE_KEY!);

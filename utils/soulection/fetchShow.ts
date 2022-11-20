@@ -1,5 +1,5 @@
-import { graphql } from "@/utils/supabase.ts";
-import { List, Show, Chapter, Marker, ShowLinks } from "@/utils/types.ts";
+import { graphql, supabase } from "@/utils/supabase.ts";
+import { Chapter, List, Marker, Show, ShowLinks } from "@/utils/types.ts";
 
 interface Data {
   showsCollection: List<Show>;
@@ -35,54 +35,7 @@ const q = `{
             node {
               id
               title
-              markersCollection(first: 30, orderBy: [{position: AscNullsLast}]) {
-                pageInfo {
-                  hasNextPage
-                  endCursor
-                }
-                edges {
-                  node {
-                    timestamp
-                    position
-                    tracks {
-                      title
-                      id
-                      slug
-                      artists {
-                        title
-                        id
-                        slug
-                      }
-                    }
-                  }
-                }
-              }
             }
-          }
-        }
-      }
-    }
-  }
-}`;
-
-const markersQuery = `{
-  markersCollection(after: $nextCursor, filter: {chapter: {eq: $chapter}}, orderBy: [{position: AscNullsLast}]) {
-    pageInfo {
-      hasNextPage
-      endCursor
-    }
-    edges {
-      node {
-        timestamp
-        position
-        tracks {
-          title
-          id
-          slug
-          artists {
-            title
-            id
-            slug
           }
         }
       }
@@ -95,47 +48,25 @@ export default async function fetchShow(slug: string): Promise<Show> {
   const show = data.showsCollection.edges[0].node;
 
   const chapters = show.chaptersCollection.edges.map((edge) => edge.node) as [
-    Chapter
+    Chapter,
   ];
-  chapters.forEach(async (chapter) => {
-    chapter.markers = []
-    let lastCursor = null;
-    console.log(chapter.id);
-    if (chapter.markersCollection.pageInfo.hasNextPage) {
-      lastCursor = chapter.markersCollection.pageInfo.endCursor;
-    }
-    console.log(chapter.markersCollection.pageInfo);
-    const markers = chapter.markersCollection.edges.map((edge) => edge.node) as [
-      Marker
-    ];
+  for (const chapter of chapters) {
+    chapter.markers = [];
 
-    let pages = 0;
-    while (pages < 10 && lastCursor !== null) {
-      pages++;
-      console.log("fetching page", lastCursor);
-      const data = (await graphql<MarkersData>(markersQuery, {
-        nextCursor: lastCursor!,
-        chapter: chapter.id
-      })) as MarkersData;
-      console.log(data.markersCollection.pageInfo);
-      if (lastCursor === data.markersCollection.pageInfo.endCursor) {
-        lastCursor = null;
-      } else {
-        if (data.markersCollection.pageInfo.hasNextPage) {
-          lastCursor = data.markersCollection.pageInfo.endCursor;
-        } else {
-          lastCursor = null;
-        }
-      }
-      const newMarkers = data.markersCollection.edges.map(
-        (edge) => edge.node
-      ) as [Marker];
-      // markers = markers.concat(newMarkers) as [Marker];
-      console.log(pages, lastCursor);
+    const { data, error } = await supabase
+      .from("markers")
+      .select(
+        "*, tracks:track(id, title, artwork, slug, artists:artist(id, title, slug))",
+      )
+      .eq("chapter", chapter.id)
+      .order("position", { ascending: true })
+      .limit(1000);
+    if (error) {
+      console.error(error);
     }
-    console.log(markers.length);
-    chapter.markers = markers;
-  });
+    console.log(data[1]);
+    chapter.markers = data;
+  }
 
   show.chapters = chapters;
 
@@ -144,9 +75,10 @@ export default async function fetchShow(slug: string): Promise<Show> {
   const searchParams = new URLSearchParams({
     url: links.soundcloud,
     format: "json",
-    client_id: Deno.env.get("SOUNDCLOUD_CLIENT_ID")!
+    client_id: Deno.env.get("SOUNDCLOUD_CLIENT_ID")!,
   });
-  const url = `https://api-widget.soundcloud.com/resolve?${searchParams.toString()}`;
+  const url =
+    `https://api-widget.soundcloud.com/resolve?${searchParams.toString()}`;
   const respResolver = await fetch(url).then((res) => {
     if (res.ok) return res.json();
     console.error("Unable to load Soundcloud Media, try the client_id");
@@ -158,7 +90,7 @@ export default async function fetchShow(slug: string): Promise<Show> {
     let mediaUrl = respResolver.media.transcodings.find(
       (t: SoundcloudTranscoding) =>
         t.format.protocol === "progressive" &&
-        t.format.mime_type === "audio/mpeg"
+        t.format.mime_type === "audio/mpeg",
     )?.url;
     if (!mediaUrl) {
       mediaUrl = respResolver.media.transcodings.at(-1).url;

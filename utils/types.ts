@@ -20,8 +20,6 @@ export interface Node<T> {
   cursor: string;
 }
 
-
-
 export type Show = {
   title: string;
   tags: [number];
@@ -39,27 +37,28 @@ export type Chapter = {
   title: string;
   markersCollection: List<Marker>;
   markers: [Marker?];
-}
+};
 
 export type Marker = {
-  timestamp: number;
+  timestamp: string;
   position: number;
   tracks?: Track;
   rawTrack: string;
-}
+};
 
 export type Track = {
   id: string;
   title: string;
   slug: string;
   artists: Artist;
-}
+  artwork: string;
+};
 
 export type Artist = {
   id: string;
   title: string;
   slug: string;
-}
+};
 
 export interface PreloadData {
   readonly [key: string]:
