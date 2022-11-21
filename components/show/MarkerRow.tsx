@@ -14,6 +14,7 @@ export default function MarkerRow({ marker }: MarkerRowProps) {
         <TrackRow
           artist={track.artists.title}
           title={track.title}
+          artwork={track.artwork}
           href={href}
           position={marker.position}
           timestamp={marker.timestamp}

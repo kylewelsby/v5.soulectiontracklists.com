@@ -11,10 +11,11 @@ export default function Artwork(
   for (const name of names) {
     classes.push(`${name}-${size}`);
   }
+  const presrc = "/" + props.src;
   return (
-    <div>
+    <div class="rounded-xl md:rounded-2xl shadow-lg inline-block object-cover overflow-hidden">
       <TwicImg
-        src={src}
+        src={presrc}
         alt={alt}
         placeholder="preview"
         preTransform="cover=128x128"

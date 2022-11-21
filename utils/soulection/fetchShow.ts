@@ -26,6 +26,7 @@ const q = `{
         title
         published_at
         links
+        content
         chaptersCollection(first: 30, orderBy: [{position: AscNullsLast}]) {
           edges {
             node {

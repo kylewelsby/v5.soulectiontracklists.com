@@ -28,6 +28,8 @@ export type Show = {
   links: string;
   data: string;
   media: ShowLinks;
+  content: string;
+  published_at: string;
   chaptersCollection: List<Chapter>;
   chapters: [Chapter];
 };

@@ -14,6 +14,7 @@ const q = `{
         tags
         slug
         artwork
+        content
       }
     }
   }
