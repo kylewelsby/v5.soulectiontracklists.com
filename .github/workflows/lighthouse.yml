@@ -20,9 +20,9 @@ jobs:
           node-version: 16.x
 
       - name: Install Lighthouse CI
-        run: npm install -g @lhci/cli@0.9.x
+        run: npm install -g @lhci/cli@0.10.x
 
       - name: Run Lighthouse
-        run: lhci autorun --collect.url="$URL" --collect.url="$URL/docs/introduction" --upload.target="temporary-public-storage"
+        run: lhci autorun --collect.url="$URL" --collect.url="$URL/tracklists/550" --upload.target="temporary-public-storage"
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
