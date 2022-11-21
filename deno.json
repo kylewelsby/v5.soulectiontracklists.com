@@ -1,6 +1,7 @@
 {
   "tasks": {
     "start": "deno run -A --watch=static/,routes/ dev.ts",
+    "typecheck": "deno check --remote main.ts dev.ts",
     "npm:add": "deno run -A https://esm.sh/v96 add",
     "npm:update": "deno run -A https://esm.sh/v96 update",
     "npm:remove": "deno run -A https://esm.sh/v96 remove"
