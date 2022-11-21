@@ -1,5 +1,5 @@
 import { graphql, supabase } from "@/utils/supabase.ts";
-import { Chapter, List, Show, Marker, ShowLinks } from "@/utils/types.ts";
+import { Chapter, List, Marker, Show, ShowLinks } from "@/utils/types.ts";
 
 interface Data {
   showsCollection: List<Show>;
