@@ -15,12 +15,12 @@ export default function Tracklist({ slug }: TracklistProps) {
 
   if (details.error) {
     console.error(details.error);
-    return "error";
+    return <div>Error</div>;
   }
   const show = useComputed(() => details.data);
 
   if (show.value === null || show.value === undefined) {
-    return "loading";
+    return <div>Loading</div>;
   }
 
   const onPlay = (e: MouseEvent) => {

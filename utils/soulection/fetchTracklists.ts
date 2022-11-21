@@ -1,8 +1,8 @@
 import { graphql } from "@/utils/supabase.ts";
-import { List, Show, ShowNode } from "@/utils/types.ts";
+import { List, Show } from "@/utils/types.ts";
 
 interface Data {
-  showsCollection: List<ShowNode>;
+  showsCollection: List<Show>;
 }
 
 const q = `{

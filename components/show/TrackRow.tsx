@@ -13,6 +13,7 @@ export default function TrackRow(
   { artist, title, href, artwork, timestamp, position }: TrackRowProps,
 ) {
   // const href = `/tracks/${track.id}`;
+  const trackName = `${artist} - ${title}`;
   return (
     <a
       href={href}
@@ -21,7 +22,8 @@ export default function TrackRow(
       <div class="h-20 w-20 mr-6 relative rounded">
         <Artwork
           src={artwork ? artwork : "/default-artist.png"}
-          class="min-w-20 max-w-20 min-h-20 max-h-20"
+          alt={trackName}
+          size={20}
         />
         {position !== undefined && (
           <span class="absolute bottom-0 right-0 bg-gray-800 rounded-full text-white text-xs font-bold px-2 py-1">

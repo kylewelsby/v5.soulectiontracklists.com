@@ -10,11 +10,11 @@ export default function Discover() {
   const tracklists = useComputed(() => details.data);
   if (details.error) {
     console.error(details.error);
-    return "error";
+    return <div>Error</div>;
   }
 
   if (tracklists.value === null || tracklists.value === undefined) {
-    return "loading";
+    return <div>Loading</div>;
   }
 
   return (

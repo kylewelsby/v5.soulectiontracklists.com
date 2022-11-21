@@ -1,6 +1,6 @@
 import { useCallback } from "preact/hooks";
 import { batch } from "@preact/signals";
-import { playerPlaying, playerUrl } from "../utils/state.ts";
+import { playerPlaying, playerUrl } from "@/utils/state.ts";
 
 interface PlayShopProps {
   soundcloud: string;

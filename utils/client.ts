@@ -62,5 +62,5 @@ function useSWRSignal<T>(endpoint: string): ResponseSignal<T> {
     get error() {
       return error.value;
     },
-  }), [data, error]);
+  }), [data, error]) as ResponseSignal<T>;
 }

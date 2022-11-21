@@ -1,12 +1,8 @@
 import { graphql, supabase } from "@/utils/supabase.ts";
-import { Chapter, List, Marker, Show, ShowLinks } from "@/utils/types.ts";
+import { Chapter, List, Show, Marker, ShowLinks } from "@/utils/types.ts";
 
 interface Data {
   showsCollection: List<Show>;
-}
-
-interface MarkersData {
-  markersCollection: List<Marker>;
 }
 
 interface SoundcloudTranscoding {
@@ -64,8 +60,7 @@ export default async function fetchShow(slug: string): Promise<Show> {
     if (error) {
       console.error(error);
     }
-    console.log(data[1]);
-    chapter.markers = data;
+    chapter.markers = data as [Marker];
   }
 
   show.chapters = chapters;
