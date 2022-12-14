@@ -18,7 +18,6 @@ jobs:
         name: Install Node.js 18.x
         with:
           node-version: 18
-          cache: 'npm'
 
       - name: Install Lighthouse CI
         run: npm install -g @lhci/cli@0.10.x
