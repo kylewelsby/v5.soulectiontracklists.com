@@ -12,7 +12,7 @@ export default function TracklistCard({ tracklist }: TracklistCardProps) {
   return (
     <a
       class="dark:hover:bg-gray-800 transition p-4 -mx-4 flex flex-row items-center"
-      href={`/tracklist/${tracklist.slug}`}
+      href={`/tracklists/${tracklist.slug}`}
     >
       <Artwork
         src={tracklist.artwork}

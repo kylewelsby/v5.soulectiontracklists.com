@@ -25,7 +25,7 @@ export type Show = {
   tags: [number];
   artwork: string;
   slug: string;
-  links: string;
+  links: ShowLinks;
   data: string;
   media: ShowLinks;
   content: string;
