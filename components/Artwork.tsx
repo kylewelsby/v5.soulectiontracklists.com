@@ -1,4 +1,4 @@
-import { TwicImg } from "@/utils/twicpics.ts";
+import { IKImage } from "imagekitio-react";
 
 export default function Artwork(
   props: { src: string; alt: string; size?: number },
@@ -14,14 +14,18 @@ export default function Artwork(
   const presrc = "/" + props.src;
   return (
     <div class="rounded-xl md:rounded-2xl shadow-lg inline-block object-cover overflow-hidden">
-      <TwicImg
-        src={presrc}
-        alt={alt}
-        placeholder="preview"
-        preTransform="cover=128x128"
-        transition="fade"
-        mode="cover"
-        classNames={classes.join(" ")}
+      <IKImage
+        path={presrc}
+        transformation={[
+          {
+            height: "128",
+            width: "128",
+            ar: "1:1",
+            c: "maintain_ratio",
+            fo: "auto",
+          },
+        ]}
+        urlEndpoint="https://ik.imagekit.io/29e7mvzdh/soulection/"
       />
     </div>
   );
