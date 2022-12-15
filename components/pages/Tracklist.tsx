@@ -2,6 +2,7 @@ import { useContext } from "preact/hooks";
 import { useTracklist } from "@/utils/client.ts";
 import { PlayerQueue } from "@/utils/player_queue.ts";
 import { useComputed } from "@preact/signals";
+import { Show } from "@/utils/types.ts";
 
 import ChapterRow from "@/components/show/ChapterRow.tsx";
 
@@ -23,19 +24,23 @@ export default function Tracklist({ slug }: TracklistProps) {
     return <div>Loading</div>;
   }
 
-  const onPlay = (e: MouseEvent) => {
+  const onPlay = async (e: MouseEvent) => {
     e.preventDefault();
-    queue.listenTo(show.value!);
+    const resp = await fetch(`/api/shows/${slug}/soundcloud`);
+    const json = await resp.json();
+    const showNew = show as unknown as Show;
+    showNew.data = json.media;
+    queue.listenTo(showNew);
   };
 
   return (
     <div>
       <a href="/">Go Back</a>
       <h1>{show.value.title}</h1>
-      {show.value!.chapters.map((chapter) => <ChapterRow chapter={chapter} />)}
       <div onClick={onPlay}>
         Play Show
       </div>
+      {show.value!.chapters.map((chapter) => <ChapterRow chapter={chapter} />)}
     </div>
   );
 }
