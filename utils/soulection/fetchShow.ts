@@ -96,10 +96,8 @@ export async function fetchShowLinks(slug: string): Promise<ShowLinks> {
   } finally {
     connection.release();
   }
-  console.log(result)
   return result.rows[0].links;
 }
-
 
 export async function fetchMedia(soundcloudUrl: string): Promise<string> {
   const searchParams = new URLSearchParams({
@@ -114,7 +112,7 @@ export async function fetchMedia(soundcloudUrl: string): Promise<string> {
     console.error("Unable to load Soundcloud Media, try the client_id");
     console.error(res.statusText);
   });
-  let media
+  let media;
   if (respResolver) {
     // console.log(respResolver.media.transcodings);
     // let mediaUrl = respResolver.media.transcodings.find((t: SoundcloudTranscoding) => t.format.protocol === "hls" && t.format.mime_type === "audio/mpeg")?.url
@@ -134,5 +132,5 @@ export async function fetchMedia(soundcloudUrl: string): Promise<string> {
     const mediaResolved = await fetch(mediaUrl).then((resp) => resp.json());
     media = mediaResolved.url;
   }
-  return media
+  return media;
 }

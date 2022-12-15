@@ -25,6 +25,8 @@ export default function Artwork(
             fo: "auto",
           },
         ]}
+        width={128}
+        height={128}
         urlEndpoint="https://ik.imagekit.io/29e7mvzdh/soulection/"
       />
     </div>
