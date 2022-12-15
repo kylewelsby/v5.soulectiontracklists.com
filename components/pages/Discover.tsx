@@ -23,9 +23,15 @@ export default function Discover() {
     <div>
       <SiteSubNav title="Tracklists">
         <SiteSubNavLink href="/tracklists/">All</SiteSubNavLink>
-        <SiteSubNavLink href="/tracklists/t/soulection-radio/">Soulection Radio</SiteSubNavLink>
-        <SiteSubNavLink href="/tracklists/t/takeover/">Takeovers</SiteSubNavLink>
-        <SiteSubNavLink href="/tracklists/t/guest/">Guest Appearance</SiteSubNavLink>
+        <SiteSubNavLink href="/tracklists/t/soulection-radio/">
+          Soulection Radio
+        </SiteSubNavLink>
+        <SiteSubNavLink href="/tracklists/t/takeover/">
+          Takeovers
+        </SiteSubNavLink>
+        <SiteSubNavLink href="/tracklists/t/guest/">
+          Guest Appearance
+        </SiteSubNavLink>
         <SiteSubNavLink href="/tracklists/t/specials/">Specials</SiteSubNavLink>
       </SiteSubNav>
       <h2>All Tracklists</h2>

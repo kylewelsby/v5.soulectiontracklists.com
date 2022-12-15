@@ -1,7 +1,7 @@
 import type { PreloadData } from "@/utils/types.ts";
 import MusicRoutes from "@/islands/MusicRoutes.tsx";
 import PlayerWidget from "@/islands/PlayerWidget.tsx";
-import SiteNav from "@/components/Site/SiteNav.tsx"
+import SiteNav from "@/components/Site/SiteNav.tsx";
 
 interface MusicBrowserProps {
   url: string;
