@@ -24,7 +24,7 @@ const pool = new postgres.Pool(databaseUrl, 3, true);
 
 export default async function fetchShow(slug: string): Promise<Show> {
   const connection = await pool.connect();
-  const result = await connection.queryObject`SELECT
+  const result = await connection.queryObject<Show>(`SELECT
   shows.id,
   shows.title,
   shows.links,
@@ -71,10 +71,10 @@ export default async function fetchShow(slug: string): Promise<Show> {
     GROUP BY chapters.id
   ) AS c ON shows.id = c.show
   WHERE
-    shows.slug = ${slug}
-    AND shows.profile = 'QiEFFErt688'`;
+    shows.slug = '${slug}'
+    AND shows.profile = 'QiEFFErt688'`);
 
-  const show = result.rows[0] as unknown as Show;
+  const show = result.rows[0];
 
   if (show && show.links && show.links.soundcloud) {
     const searchParams = new URLSearchParams({
@@ -111,6 +111,5 @@ export default async function fetchShow(slug: string): Promise<Show> {
       show.data = media;
     }
   }
-
   return show;
 }
