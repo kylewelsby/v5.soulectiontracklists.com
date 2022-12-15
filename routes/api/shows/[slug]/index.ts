@@ -8,7 +8,6 @@ export const handler: Handler<never> = async (_req, ctx) => {
   if (show === null) {
     return new Response(null, { status: Status.NotFound });
   }
-  console.log("API CALLED", show);
   return Response.json(show, {
     headers: { "content-type": contentType(".json") },
   });

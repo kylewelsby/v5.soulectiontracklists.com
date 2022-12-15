@@ -1,5 +1,5 @@
 import * as postgres from "$postgres";
-import { List, Show } from "@/utils/types.ts";
+import { List, Show, ShowLinks } from "@/utils/types.ts";
 
 interface Data {
   showsCollection: List<Show>;
@@ -79,42 +79,60 @@ export default async function fetchShow(slug: string): Promise<Show> {
     connection.release();
   }
 
-  const show = result.rows[0];
+  return result.rows[0];
+}
 
-  if (show && show.links && show.links.soundcloud) {
-    const searchParams = new URLSearchParams({
-      url: show.links.soundcloud,
-      format: "json",
-      client_id: Deno.env.get("SOUNDCLOUD_CLIENT_ID")!,
-    });
-    const url =
-      `https://api-widget.soundcloud.com/resolve?${searchParams.toString()}`;
-    const respResolver = await fetch(url).then((res) => {
-      if (res.ok) return res.json();
-      console.error("Unable to load Soundcloud Media, try the client_id");
-      console.error(res.statusText);
-    });
-    if (respResolver) {
-      // console.log(respResolver.media.transcodings);
-      // let mediaUrl = respResolver.media.transcodings.find((t: SoundcloudTranscoding) => t.format.protocol === "hls" && t.format.mime_type === "audio/mpeg")?.url
-      let mediaUrl = respResolver.media.transcodings.find(
-        (t: SoundcloudTranscoding) =>
-          t.format.protocol === "progressive" &&
-          t.format.mime_type === "audio/mpeg",
-      )?.url;
-      if (!mediaUrl) {
-        mediaUrl = respResolver.media.transcodings.at(-1).url;
-      }
-      mediaUrl = `${mediaUrl}?client_id=${
-        Deno.env.get(
-          "SOUNDCLOUD_CLIENT_ID",
-        )
-      }`;
-      const mediaResolved = await fetch(mediaUrl).then((resp) => resp.json());
-      const media = mediaResolved.url;
-
-      show.data = media;
-    }
+export async function fetchShowLinks(slug: string): Promise<ShowLinks> {
+  const connection = await pool.connect();
+  let result;
+  try {
+    result = await connection.queryObject<Show>(`SELECT
+      shows.links
+      FROM shows
+      WHERE
+        shows.slug = '${slug}'
+        AND shows.profile = 'QiEFFErt688'
+    `);
+  } finally {
+    connection.release();
   }
-  return show;
+  console.log(result)
+  return result.rows[0].links;
+}
+
+
+export async function fetchMedia(soundcloudUrl: string): Promise<string> {
+  const searchParams = new URLSearchParams({
+    url: soundcloudUrl,
+    format: "json",
+    client_id: Deno.env.get("SOUNDCLOUD_CLIENT_ID")!,
+  });
+  const url =
+    `https://api-widget.soundcloud.com/resolve?${searchParams.toString()}`;
+  const respResolver = await fetch(url).then((res) => {
+    if (res.ok) return res.json();
+    console.error("Unable to load Soundcloud Media, try the client_id");
+    console.error(res.statusText);
+  });
+  let media
+  if (respResolver) {
+    // console.log(respResolver.media.transcodings);
+    // let mediaUrl = respResolver.media.transcodings.find((t: SoundcloudTranscoding) => t.format.protocol === "hls" && t.format.mime_type === "audio/mpeg")?.url
+    let mediaUrl = respResolver.media.transcodings.find(
+      (t: SoundcloudTranscoding) =>
+        t.format.protocol === "progressive" &&
+        t.format.mime_type === "audio/mpeg",
+    )?.url;
+    if (!mediaUrl) {
+      mediaUrl = respResolver.media.transcodings.at(-1).url;
+    }
+    mediaUrl = `${mediaUrl}?client_id=${
+      Deno.env.get(
+        "SOUNDCLOUD_CLIENT_ID",
+      )
+    }`;
+    const mediaResolved = await fetch(mediaUrl).then((resp) => resp.json());
+    media = mediaResolved.url;
+  }
+  return media
 }
