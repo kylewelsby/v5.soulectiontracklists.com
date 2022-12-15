@@ -87,6 +87,7 @@ export default {
         fontWeight: "normal",
         src:
           "local('Conthrax SemiBold'), url('/fonts/conthrax-sb.woff') format('woff')",
+        fontDisplay: "swap",
       },
     ],
     body: apply`bg-[#151515] text-white`,

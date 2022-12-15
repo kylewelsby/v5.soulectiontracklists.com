@@ -6,6 +6,11 @@ export default function App({ Component }: AppProps) {
     <>
       <Head>
         <link rel="icon" href={asset("/favicon.ico")} type="image/x-icon" />
+        <link
+          rel="preload"
+          as="font"
+          href="/fonts/conthrax-sb.woff"
+        />
         <link rel="preconnect" href="https://ik.imagekit.io" />
         <link
           rel="preload"
