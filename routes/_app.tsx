@@ -9,7 +9,7 @@ export default function App({ Component }: AppProps) {
         <link
           rel="preload"
           as="font"
-          href="/fonts/conthrax-sb.woff"
+          href={asset("/fonts/conthrax-sb.woff")}
         />
         <link rel="preconnect" href="https://ik.imagekit.io" />
         <link
