@@ -16,6 +16,7 @@ export default function Artwork(
     <div class="rounded-xl md:rounded-2xl shadow-lg inline-block object-cover overflow-hidden">
       <IKImage
         path={presrc}
+        alt={alt}
         transformation={[
           {
             height: "128",
@@ -25,6 +26,8 @@ export default function Artwork(
             fo: "auto",
           },
         ]}
+        lqip={{ active: true, quality: 20 }}
+        loading="lazy"
         width={128}
         height={128}
         urlEndpoint="https://ik.imagekit.io/29e7mvzdh/soulection/"
