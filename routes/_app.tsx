@@ -9,12 +9,16 @@ export default function App({ Component }: AppProps) {
         <link
           rel="preload"
           as="font"
+          type="font/woff"
+          crossOrigin=""
           href={asset("/fonts/conthrax-sb.woff")}
         />
         <link rel="preconnect" href="https://ik.imagekit.io" />
         <link
           rel="preload"
           as="image"
+          crossOrigin=""
+          type="image/png"
           href="https://ik.imagekit.io/29e7mvzdh/soulection/tr:h-128,w-128,ar-1:1,c-maintain_ratio,fo-auto/default-artist.png"
         />
       </Head>
