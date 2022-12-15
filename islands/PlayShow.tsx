@@ -3,21 +3,22 @@ import { batch } from "@preact/signals";
 import { playerPlaying, playerUrl } from "@/utils/state.ts";
 
 interface PlayShopProps {
-  soundcloud: string;
+  showSlug: string;
 }
 
 export default function PlayShow(props: PlayShopProps) {
-  // console.log("PlayShow", props.soundcloud);
-  const play = useCallback(() => {
+  const play = useCallback(async () => {
+    const resp = await fetch(`/api/shows/${props.showSlug}/soundcloud`);
+    const json = await resp.json();
     batch(() => {
-      playerUrl.value = props.soundcloud;
+      playerUrl.value = json.media;
       playerPlaying.value = false;
     });
-  }, [props.soundcloud]);
+  }, [props.showSlug]);
   return (
     <button
       onClick={play}
-      title={`Play ${props.soundcloud}`}
+      title="Show"
     >
       <svg class="w-6 mr-2 fill-current" viewBox="0 0 24 25">
         <path

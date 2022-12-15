@@ -14,7 +14,7 @@ interface MusicRouteProps {
 
 export default function MusicRoutes({ url, initial = {} }: MusicRouteProps) {
   return (
-    <div>
+    <div class="container mx-auto mt-10 mb-6 p-5">
       <FallbackProvider value={initial}>
         <Router url={IS_BROWSER ? undefined : url} static={!IS_BROWSER}>
           <Route path="/" component={Discover} />

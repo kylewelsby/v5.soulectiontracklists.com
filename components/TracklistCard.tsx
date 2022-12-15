@@ -20,7 +20,7 @@ export default function TracklistCard({ tracklist }: TracklistCardProps) {
         size={32}
       />
       <div class="ml-4 flex-grow min-w-0">
-        <h4 class="text-lg font-bold mb-2">{tracklist.title}</h4>
+        <h4 class="mb-2">{tracklist.title}</h4>
         <div
           class="text-gray-300 truncate mb-2"
           dangerouslySetInnerHTML={{ __html: excerpt }}

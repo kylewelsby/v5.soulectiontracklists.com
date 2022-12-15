@@ -297,6 +297,7 @@
     "https://esm.sh/stable/preact@10.11.3/deno/jsx-runtime.js": "e36c99488315194b66a244549e697bf4488b09289dc070f7453875d2fc5bb843",
     "https://esm.sh/stable/preact@10.11.3/deno/preact.js": "d17d6b3217ccb0352f68bbd47930aa25d260c1a544f45bcbcf4cd1ded9d630bb",
     "https://esm.sh/twind@0.16.17": "0e9a7188118ae845d1198d0b141946fa869f7c9cd7ba19ebec58f0a3839eb009",
+    "https://esm.sh/twind@0.16.17/colors": "4564ce882e85486e9f6861130863742e58c646359d12fba07feb34a32626ca8b",
     "https://esm.sh/twind@0.16.17/sheets": "343c2db26c435f148b7aed28b2c29d7bad189a279e4dab6e545ca51021565983",
     "https://esm.sh/v96/*preact-router@4.1.0": "856cd505675d97f85ea6be35a0096ca1bbcb14161b2a103df8219569f77b361f",
     "https://esm.sh/v96/@preact/signals-core@1.2.2/X-ZS8q/deno/signals-core.js": "c59e0b57e1fa8719c12cf1f0919ca26f5b524505f39942c36a1b44467bc28916",
@@ -540,6 +541,8 @@
     "https://esm.sh/v99/swr@1.3.0/X-YS9yZWFjdDpwcmVhY3QvY29tcGF0P2FsaWFzPXJlYWN0OnByZWFjdC9jb21wYXQKZS8q/dist/use-swr.d.ts": "e9da5c30a3cf9787300711b6b3c6cb7cee1e4103a823b1342f7599814f59867b",
     "https://esm.sh/v99/swr@1.3.0/X-YS9yZWFjdDpwcmVhY3QvY29tcGF0P2FsaWFzPXJlYWN0OnByZWFjdC9jb21wYXQKZS8q/dist/utils/config.d.ts": "7f147917c1977072eaeaa7df28c72def2c5e507f30d525645b3f6d50c3c8cc38",
     "https://esm.sh/v99/swr@1.3.0/X-YS9yZWFjdDpwcmVhY3QvY29tcGF0P2FsaWFzPXJlYWN0OnByZWFjdC9jb21wYXQKZS8q/dist/utils/use-swr-config.d.ts": "31c76c698d3ca4231cbeead1dd338e96dd11a2b4bcb877839a7476c35ce2d312",
+    "https://esm.sh/v99/twind@0.16.17/colors/colors.d.ts": "5d718e9e958b108054073182c3a6b3a8c8352b4c9b2c520a15bdb56bac56868f",
+    "https://esm.sh/v99/twind@0.16.17/deno/colors.js": "e3e6b2135ee371978b66011b130019c2a70be71c7743a5ef2dc657f7bbc16edd",
     "https://esm.sh/v99/websocket@1.0.34/deno/websocket.js": "34ab64d82668fd7ab6292f9fbec4aa2c8f9099416d512e517108bb6e5a0a1605"
   }
 }

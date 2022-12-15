@@ -2,6 +2,8 @@ import { useComputed } from "@preact/signals";
 
 import { useTracklists } from "@/utils/client.ts";
 import TracklistCard from "@/components/TracklistCard.tsx";
+import SiteSubNav from "@/components/Site/SiteSubNav.tsx";
+import SiteSubNavLink from "@/components/Site/SiteSubNavLink.tsx";
 
 import { Show } from "@/utils/types.ts";
 
@@ -19,7 +21,14 @@ export default function Discover() {
 
   return (
     <div>
-      <h1>Discover</h1>
+      <SiteSubNav title="Tracklists">
+        <SiteSubNavLink href="/tracklists/">All</SiteSubNavLink>
+        <SiteSubNavLink href="/tracklists/t/soulection-radio/">Soulection Radio</SiteSubNavLink>
+        <SiteSubNavLink href="/tracklists/t/takeover/">Takeovers</SiteSubNavLink>
+        <SiteSubNavLink href="/tracklists/t/guest/">Guest Appearance</SiteSubNavLink>
+        <SiteSubNavLink href="/tracklists/t/specials/">Specials</SiteSubNavLink>
+      </SiteSubNav>
+      <h2>All Tracklists</h2>
       {tracklists.value?.map((tracklist: Show) => (
         <TracklistCard tracklist={tracklist} />
       ))}

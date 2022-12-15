@@ -1,4 +1,6 @@
 import { Options } from "$fresh/plugins/twind.ts";
+import * as colors from "twind/colors";
+import { apply } from "twind";
 
 const SIZES = [10, 12, 32, 48, 84];
 const whitelistSizes = [""];
@@ -21,32 +23,32 @@ export default {
         12: "3rem",
         20: "5rem",
         24: "6rem",
-        32: "8rem",
+        32: "8rem"
       },
       minHeight: {
         12: "3rem",
         20: "5rem",
         24: "6rem",
-        32: "8rem",
+        32: "8rem"
       },
       maxWidth: {
         12: "3rem",
         20: "5rem",
         24: "6rem",
-        32: "8rem",
+        32: "8rem"
       },
       maxHeight: {
         12: "3rem",
         20: "5rem",
         24: "6rem",
-        32: "8rem",
+        32: "8rem"
       },
       spacing: {
         72: "18rem",
         84: "21rem",
-        96: "24rem",
+        96: "24rem"
       },
-      colours: {
+      colors: {
         yellow: {
           50: "#FFFCF3",
           100: "#FEFAE7",
@@ -57,7 +59,7 @@ export default {
           600: "#E0B509",
           700: "#957906",
           800: "#705A05",
-          900: "#4B3C03",
+          900: "#4B3C03"
         },
         gray: {
           50: "#F7F7F7",
@@ -69,12 +71,53 @@ export default {
           600: "#585858",
           700: "#3B3B3B",
           800: "#2C2C2C",
-          900: "#1D1D1D",
-        },
+          900: "#1D1D1D"
+        }
       },
       fontFamily: {
-        header: "Conthrax SemiBold",
-      },
-    },
+        header: "Conthrax SemiBold"
+      }
+    }
   },
+  preflight: {
+    "@font-face": [
+      {
+        fontFamily: "Conthrax SemiBold",
+        fontStyle: "normal",
+        fontWeight: "normal",
+        src: "local('Conthrax SemiBold'), url('/fonts/conthrax-sb.woff') format('woff')"
+      }
+    ],
+    body: apply`bg-[#151515] text-white`,
+    a: {
+      color: colors.gray[100],
+      textDecoration: "inherit",
+      "&:hover": {
+        color: colors.white
+      }
+    },
+    "h1,h2,h3,h4,h5,h6": null,
+    h1: apply`font(bold) text(white 3xl)`,
+    h2: apply`font(normal) text(white 2xl)`,
+    h3: apply`font(bold) text(white xl)`,
+    h4: apply`font(bold) text(white lg)`,
+    h5: apply`font(bold) text(white md)`,
+    h6: apply`font(bold) text(white sm)`,
+  },
+  plugins: {
+    'btn': apply`
+      inline-flex
+      items-center
+      px-5 py-2
+      border
+      border(transparent)
+      text(base white)
+      font(medium)
+      bg-gray-700
+      rounded-full
+      shadow-sm
+      hover:(bg-gray-800)
+      focus:(ouline-none ring-2 ring-offset-2 ring-gray-700)
+    `
+  }
 } as unknown as Options;
