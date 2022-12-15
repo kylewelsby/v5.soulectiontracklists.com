@@ -1,6 +1,7 @@
 import { Options } from "$fresh/plugins/twind.ts";
 import * as colors from "twind/colors";
 import { apply } from "twind";
+import { asset } from "$fresh/runtime.ts";
 
 const SIZES = [10, 12, 32, 48, 84];
 const whitelistSizes = [""];
@@ -85,8 +86,9 @@ export default {
         fontFamily: "Conthrax SemiBold",
         fontStyle: "normal",
         fontWeight: "normal",
-        src:
-          "local('Conthrax SemiBold'), url('/fonts/conthrax-sb.woff') format('woff')",
+        src: `local('Conthrax SemiBold'), url('${
+          asset("/fonts/conthrax-sb.woff")
+        }') format('woff')`,
         fontDisplay: "swap",
       },
     ],
