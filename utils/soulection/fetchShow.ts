@@ -1,4 +1,4 @@
-import * as postgres from "$postgres";
+import { pool } from "@/utils/db.ts";
 import { List, Show, ShowLinks } from "@/utils/types.ts";
 
 interface Data {
@@ -18,10 +18,6 @@ interface SoundcloudTranscodingFormat {
   protocol: string;
   mime_type: string;
 }
-
-const databaseUrl = Deno.env.get("DATABASE_URL")!;
-const pool = new postgres.Pool(databaseUrl, 3, true);
-
 export default async function fetchShow(slug: string): Promise<Show> {
   const connection = await pool.connect();
   let result;

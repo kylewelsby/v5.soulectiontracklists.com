@@ -5,11 +5,11 @@ import MusicBrowser from "@/components/MusicBrowser.tsx";
 
 import { Show } from "@/utils/types.ts";
 
-interface HomeData {
+interface Data {
   [key: string]: readonly Show[] | undefined;
 }
 
-export const handler: Handlers<HomeData> = {
+export const handler: Handlers<Data> = {
   async GET(_req, ctx) {
     const shows = await fetchTracklists();
 
@@ -19,6 +19,6 @@ export const handler: Handlers<HomeData> = {
   },
 };
 
-export default function HomePage({ url, data }: PageProps<HomeData>) {
+export default function TracklistsPage({ url, data }: PageProps<Data>) {
   return <MusicBrowser url={url.pathname} initial={data} />;
 }

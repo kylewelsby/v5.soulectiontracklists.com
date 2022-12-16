@@ -18,6 +18,8 @@ export default function MusicRoutes({ url, initial = {} }: MusicRouteProps) {
       <FallbackProvider value={initial}>
         <Router url={IS_BROWSER ? undefined : url} static={!IS_BROWSER}>
           <Route path="/" component={Discover} />
+          <Route path="/tracklists/" component={Discover} />
+          <Route path="/tracklists/t/:tag" component={Discover} />
           <Route path="/tracklists/:slug" component={Tracklist} />
         </Router>
       </FallbackProvider>

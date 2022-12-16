@@ -1,28 +1,35 @@
-import { graphql } from "@/utils/supabase.ts";
-import { List, Show } from "@/utils/types.ts";
+import { pool } from "@/utils/db.ts";
+import { Show } from "@/utils/types.ts";
 
-interface Data {
-  showsCollection: List<Show>;
-}
+export default async function fetchTracklists(
+  tagsRaw?: string,
+): Promise<Show[]> {
+  let tags = (tagsRaw || "").split(",").map(
+    (tag: string): number | number[] | undefined => {
+      if (tag === "guest") return 11;
+      if (tag === "soulection-radio") return 15;
+      if (tag === "takeover") return 5;
+      if (tag === "all-dayer") return 19;
+      if (tag === "specials") return [10, 19, 12];
+    },
+  ).flatMap((num) => num).filter((tag) => {
+    return Number.isInteger(tag);
+  }) as number[];
 
-const q = `{
-  showsCollection(first: 100, orderBy: [{published_at: DescNullsLast}]) {
-    edges {
-      node {
-        title
-        published_at
-        tags
-        slug
-        artwork
-        content
-      }
-    }
+  if (tags.length === 0) {
+    tags = [15, 19];
   }
-}`;
-
-export default async function fetchTracklists(): Promise<Show[]> {
-  const data = await graphql<Data>(q);
-  return data.showsCollection.edges
-    .filter((edge) => edge.node.tags.includes(15))
-    .map((edge) => edge.node);
+  const query = `SELECT title, published_at, tags, slug, artwork, content
+  FROM shows
+  WHERE tags && ARRAY[${tags.join(",")}]
+  ORDER BY published_at DESC
+  LIMIT 50`;
+  const connection = await pool.connect();
+  let result;
+  try {
+    result = await connection.queryObject<Show>(query);
+  } finally {
+    connection.release();
+  }
+  return result.rows;
 }

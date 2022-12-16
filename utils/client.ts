@@ -14,7 +14,10 @@ export function useTracklist(slug: string) {
   return useSWRSignal<Show>(`/api/shows/${slug}`);
 }
 
-export function useTracklists() {
+export function useTracklists(rawTags?: string) {
+  if (rawTags) {
+    return useSWRSignal<readonly Show[]>(`/api/shows?tag=${rawTags}`);
+  }
   return useSWRSignal<readonly Show[]>("/api/shows");
 }
 

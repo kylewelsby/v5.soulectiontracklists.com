@@ -13,7 +13,7 @@ export default function Artwork(
   }
   const presrc = "/" + props.src;
   return (
-    <div class="rounded-xl md:rounded-2xl shadow-lg inline-block object-cover overflow-hidden">
+    <div class="min-w-[128px] rounded-xl md:rounded-2xl shadow-lg inline-block object-cover overflow-hidden">
       <IKImage
         path={presrc}
         alt={alt}

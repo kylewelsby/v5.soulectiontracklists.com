@@ -1,3 +1,4 @@
+import { PageProps } from "$fresh/server.ts";
 import { useComputed } from "@preact/signals";
 
 import { useTracklists } from "@/utils/client.ts";
@@ -7,8 +8,14 @@ import SiteSubNavLink from "@/components/Site/SiteSubNavLink.tsx";
 
 import { Show } from "@/utils/types.ts";
 
-export default function Discover() {
-  const details = useTracklists();
+interface Data {
+  tag: string;
+}
+
+export default function Discover(props: Data) {
+  const rawTags = props.tag;
+
+  const details = useTracklists(rawTags);
   const tracklists = useComputed(() => details.data);
   if (details.error) {
     console.error(details.error);
