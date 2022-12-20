@@ -6,14 +6,24 @@ export default function Artwork(
   const { src, alt, size = 24 } = props;
 
   const names = ["min-w", "max-w", "min-h", "max-h", "md:min-w", "md:min-h"];
-  const classes = [];
+  const classes = [
+    "inline-block",
+    "object-cover",
+    "overflow-hidden",
+    "rounded-xl",
+    "md:rounded-2xl",
+    "shadow-lg",
+  ];
 
   for (const name of names) {
     classes.push(`${name}-${size}`);
   }
+
   const presrc = "/" + props.src;
   return (
-    <div class="min-w-[128px] rounded-xl md:rounded-2xl shadow-lg inline-block object-cover overflow-hidden">
+    <div
+      className={classes.join(" ")}
+    >
       <IKImage
         path={presrc}
         alt={alt}

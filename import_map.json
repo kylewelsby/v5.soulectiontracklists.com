@@ -2,6 +2,7 @@
   "imports": {
     "@/": "./",
     "$media_types": "https://deno.land/std@0.162.0/media_types/mod.ts",
+    "$gfm": "https://deno.land/x/gfm@0.1.26/mod.ts",
     "$fresh/": "https://deno.land/x/fresh@1.1.2/",
     "$postgres": "https://deno.land/x/postgres@v0.17.0/mod.ts",
     "@preact/signals-core": "https://esm.sh/@preact/signals-core@1.2.2",

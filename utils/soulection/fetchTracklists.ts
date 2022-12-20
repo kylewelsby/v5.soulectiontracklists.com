@@ -1,5 +1,6 @@
 import { pool } from "@/utils/db.ts";
 import { Show } from "@/utils/types.ts";
+import { render } from "$gfm";
 
 export default async function fetchTracklists(
   tagsRaw?: string,
@@ -31,5 +32,11 @@ export default async function fetchTracklists(
   } finally {
     connection.release();
   }
-  return result.rows;
+  return result.rows.map((show) => {
+    const excerpt = show.content.split("<!--more-->")[0].trim();
+    show.excerpt = render(excerpt)
+      .replace(/<a /g, "<span ")
+      .replace(/<\/a>/g, "</span>");
+    return show;
+  });
 }

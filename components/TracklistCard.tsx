@@ -1,3 +1,4 @@
+import { render } from "$gfm";
 import Artwork from "@/components/Artwork.tsx";
 import { Show } from "@/utils/types.ts";
 
@@ -6,9 +7,9 @@ interface TracklistCardProps {
 }
 
 export default function TracklistCard({ tracklist }: TracklistCardProps) {
-  const excerpt = tracklist.content.split("<!--more-->")[0].trim();
   const formattedDate = new Intl.DateTimeFormat("en-US", { dateStyle: "long" })
     .format(Date.parse(tracklist.published_at));
+
   return (
     <a
       class="dark:hover:bg-gray-800 transition p-4 -mx-4 flex flex-row items-center"
@@ -23,7 +24,7 @@ export default function TracklistCard({ tracklist }: TracklistCardProps) {
         <h4 class="mb-2">{tracklist.title}</h4>
         <div
           class="text-gray-300 truncate mb-2"
-          dangerouslySetInnerHTML={{ __html: excerpt }}
+          dangerouslySetInnerHTML={{ __html: tracklist.excerpt! }}
         >
         </div>
         <div class="text-sm">{formattedDate}</div>

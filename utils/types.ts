@@ -29,6 +29,7 @@ export type Show = {
   data: string;
   media: ShowLinks;
   content: string;
+  excerpt?: string;
   published_at: string;
   chaptersCollection: List<Chapter>;
   chapters: [Chapter];
