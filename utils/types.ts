@@ -31,15 +31,14 @@ export type Show = {
   content: string;
   excerpt?: string;
   published_at: string;
-  chaptersCollection: List<Chapter>;
-  chapters: [Chapter];
+  chapters: Chapter[];
 };
 
 export type Chapter = {
   id: string;
   title: string;
-  markersCollection: List<Marker>;
-  markers: [Marker?];
+  content: string;
+  markers?: Marker[];
 };
 
 export type Marker = {
@@ -61,6 +60,20 @@ export type Artist = {
   id: string;
   title: string;
   slug: string;
+};
+
+export type SoundcloudTranscoding = {
+  url: string;
+  preset: string;
+  duration: number;
+  snipped: boolean;
+  format: SoundcloudTranscodingFormat;
+  quality: string;
+};
+
+export type SoundcloudTranscodingFormat = {
+  protocol: string;
+  mime_type: string;
 };
 
 export interface PreloadData {

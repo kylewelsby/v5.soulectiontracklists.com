@@ -100,12 +100,13 @@ export default {
         color: colors.white,
       },
     },
+    "p a": apply`text(sm) underline`,
     "h1,h2,h3,h4,h5,h6": null,
     h1: apply`font(bold) text(white 3xl)`,
     h2: apply`font(normal) text(white 2xl)`,
     h3: apply`font(bold) text(white xl)`,
     h4: apply`font(bold) text(white lg)`,
-    h5: apply`font(bold) text(white md)`,
+    h5: apply`font(bold) text(white base)`,
     h6: apply`font(bold) text(white sm)`,
   },
   plugins: {
@@ -121,7 +122,7 @@ export default {
       rounded-full
       shadow-sm
       hover:(bg-gray-800)
-      focus:(ouline-none ring-2 ring-offset-2 ring-gray-700)
+      focus:(outline-none ring-2 ring-offset-2 ring-gray-700)
     `,
   },
 } as unknown as Options;

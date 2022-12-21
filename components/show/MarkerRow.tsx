@@ -6,7 +6,7 @@ interface MarkerRowProps {
 }
 
 export default function MarkerRow({ marker }: MarkerRowProps) {
-  if (marker.tracks) {
+  if (marker.tracks && marker.tracks.artists) {
     const track = marker.tracks;
     const href = `/tracks/${track.id}`;
     return (
@@ -22,6 +22,9 @@ export default function MarkerRow({ marker }: MarkerRowProps) {
       </div>
     );
   }
+  // if (marker.tracks && !marker.tracks.artists) {
+  //   console.log(marker)
+  // }
   const [artist, track] = (marker.rawTrack).split(" - ");
   return (
     <div>

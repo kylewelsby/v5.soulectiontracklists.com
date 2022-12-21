@@ -9,7 +9,9 @@ export default function ChapterHero({ chapter }: ChapterHeroProps) {
       <h4 class="text-2xl font-medium">
         {chapter.title}
       </h4>
-      {/* <p>{chapter}</p> */}
+      <div
+        dangerouslySetInnerHTML={{ __html: chapter.content! }}
+      />
     </div>
   );
 }

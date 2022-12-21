@@ -25,8 +25,7 @@ export default function TracklistCard({ tracklist }: TracklistCardProps) {
         <div
           class="text-gray-300 truncate mb-2"
           dangerouslySetInnerHTML={{ __html: tracklist.excerpt! }}
-        >
-        </div>
+        />
         <div class="text-sm">{formattedDate}</div>
       </div>
     </a>

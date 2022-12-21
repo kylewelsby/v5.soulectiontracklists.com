@@ -1,83 +1,8 @@
 import { pool } from "@/utils/db.ts";
-import { List, Show, ShowLinks } from "@/utils/types.ts";
+import { Show, ShowLinks, SoundcloudTranscoding } from "@/utils/types.ts";
+import { render } from "$gfm";
 
-interface Data {
-  showsCollection: List<Show>;
-}
-
-interface SoundcloudTranscoding {
-  url: string;
-  preset: string;
-  duration: number;
-  snipped: boolean;
-  format: SoundcloudTranscodingFormat;
-  quality: string;
-}
-
-interface SoundcloudTranscodingFormat {
-  protocol: string;
-  mime_type: string;
-}
 export default async function fetchShow(slug: string): Promise<Show> {
-  // const query = `SELECT
-  // json_agg(
-  //   json_build_object(
-  //   'id', shows.id,
-  //   'title', shows.title,
-  //   'links', shows.links,
-  //     'chapters', chapters
-  //   )
-  // ) as show
-  // FROM shows
-  // INNER JOIN (
-  //   SELECT
-  //     chapters.show,
-  //     json_agg(
-  //       json_build_object(
-  //         'id', chapters.id,
-  //         'title', chapters.title,
-  //         'markers', markers.markers
-  //       )
-  //     ) AS chapters
-  //   FROM chapters
-  //   INNER JOIN (
-  //     SELECT
-  //       markers.chapter,
-  //       json_agg(
-  //         json_build_object(
-  //           'id', markers.id,
-  //           'position', markers.position,
-  //           'track_id', markers.track,
-  //           'rawTrack', markers."rawTrack",
-  //           'tracks', tracks
-  //         )
-  //       ) AS markers
-  //     FROM markers
-  //     LEFT JOIN (
-  //       SELECT
-  //         tracks.id,
-  //         tracks.title,
-  //         tracks.artwork,
-  //         artists
-  //       FROM tracks
-  //       INNER JOIN (
-  //         SELECT
-  //           artists.id,
-  //           artists.title
-  //         FROM artists
-  //       ) AS artists ON artists.id = tracks.artist
-  //     ) AS tracks ON tracks.id = markers.track
-  //     GROUP BY markers.chapter
-  //     LIMIT 1000
-  //   ) AS markers ON markers.chapter = chapters.id
-  //   GROUP BY chapters.id
-  // ) AS c ON shows.id = c.show
-  // WHERE
-  //   shows.slug = '${slug}'
-  //   AND shows.profile = 'QiEFFErt688'
-  // GROUP BY shows.id
-  // LIMIT 1`
-
   const trackQuery = `SELECT
     tracks.id,
     tracks.title,
@@ -85,9 +10,9 @@ export default async function fetchShow(slug: string): Promise<Show> {
     json_build_object(
       'id', a.id,
       'title', a.title
-    ) as artist
+    ) as artists
   FROM tracks
-  JOIN artists a ON tracks.artist = a.id`;
+  INNER JOIN artists a ON tracks.artist = a.id`;
 
   const markersQuery = `SELECT json_agg(
     json_build_object(
@@ -99,7 +24,7 @@ export default async function fetchShow(slug: string): Promise<Show> {
         'id', t.id,
         'title', t.title,
         'artwork', t.artwork,
-        'artists', t.artist
+        'artists', t.artists
       )
     )
   ) FROM markers m
@@ -114,6 +39,7 @@ export default async function fetchShow(slug: string): Promise<Show> {
     json_build_object(
       'id', c.id,
       'title', c.title,
+      'content', c.content,
       'markers',
       (${markersQuery})
     )
@@ -141,8 +67,14 @@ ORDER BY m."position" ASC, c."position" ASC`;
   }
 
   console.debug(result.query);
-
-  return result.rows[0];
+  const show = result.rows[0];
+  const chapters = show.chapters.map((chapter) => {
+    chapter.content = render(chapter.content);
+    return chapter;
+  });
+  console.log(chapters[0].markers.length);
+  show.chapters = chapters;
+  return show;
 }
 
 export async function fetchShowLinks(slug: string): Promise<ShowLinks> {
