@@ -14,45 +14,49 @@ export default function TracklistHero({ show }: TracklistHeroProps) {
   const location = locationByISOCode(show.location);
 
   return (
-    <div class="container mx-auto flex flex-col items-center to-black from-transparent bg-gradient-to-b">
-      <div class="flex flex-col lg:(flex-row items-center my-8) my-6 self-start mx-4">
-        <Artwork
-          src={show.artwork}
-          alt={show.title}
-          size={320}
-        />
-        <div class="lg:ml-10">
-          <h1 class="tracking-tighter text-4xl font-semibold">{show.title}</h1>
-          <div class="my-2 text-lg font-medium flex flex-col items-start md:(flex-row items-center)">
-            <span class="inline-block pr-2 py-1">{formattedDate}</span>
-            &bull;
-            <span class="text-opacity-70 inline py-1">
-              Live from {location}
-            </span>
-          </div>
-          <PlayShow show={show} />
-          <div class="mt-10">
-            <div class="text-opacity-50">Listen on</div>
-            <div class="flex flex-row my-2">
-              {show.links.appleMusic && (
-                <a href={show.links.appleMusic} class="btn text-xs mr-2">
-                  Apple Music
-                </a>
-              )}
-              {show.links.soundcloud && (
-                <a href={show.links.soundcloud} class="btn text-xs mr-2">
-                  Soundcloud
-                </a>
-              )}
-              {show.links.mixcloud && (
-                <a href={show.links.mixcloud} class="btn text-xs mr-2">
-                  Mixcloud
-                </a>
-              )}
+    <div class="to-black from-transparent bg-gradient-to-b">
+      <div class="container mx-auto">
+        <div class="flex flex-col lg:(flex-row items-center py-8) py-6 self-start mx-4">
+          <Artwork
+            src={show.artwork}
+            alt={show.title}
+            size={320}
+          />
+          <div class="lg:ml-10">
+            <h1 class="tracking-tighter text-4xl font-semibold">
+              {show.title}
+            </h1>
+            <div class="my-2 text-lg font-medium flex flex-col items-start md:(flex-row items-center)">
+              <span class="inline-block pr-2 py-1">{formattedDate}</span>
+              &bull;
+              <span class="text-opacity-70 inline py-1">
+                Live from {location}
+              </span>
+            </div>
+            <PlayShow show={show} />
+            <div class="mt-10">
+              <div class="text-opacity-50">Listen on</div>
+              <div class="flex flex-row my-2">
+                {show.links.appleMusic && (
+                  <a href={show.links.appleMusic} class="btn text-xs mr-2">
+                    Apple Music
+                  </a>
+                )}
+                {show.links.soundcloud && (
+                  <a href={show.links.soundcloud} class="btn text-xs mr-2">
+                    Soundcloud
+                  </a>
+                )}
+                {show.links.mixcloud && (
+                  <a href={show.links.mixcloud} class="btn text-xs mr-2">
+                    Mixcloud
+                  </a>
+                )}
+              </div>
             </div>
           </div>
+          {show.content}
         </div>
-        {show.content}
       </div>
     </div>
   );

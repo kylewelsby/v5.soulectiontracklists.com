@@ -5,7 +5,7 @@ interface ChapterHeroProps {
 }
 export default function ChapterHero({ chapter }: ChapterHeroProps) {
   return (
-    <div class="p-4 flex flex-col items-center lg:flex-row lg:items-start">
+    <div class="flex flex-col items-center lg:flex-row lg:items-start">
       <h4 class="text-2xl font-medium">
         {chapter.title}
       </h4>

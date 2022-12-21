@@ -34,17 +34,14 @@ export default function Tracklist({ slug }: TracklistProps) {
   return (
     <>
       <TracklistHero show={show.value} />
-      <div class="container mx-auto p-4 py-8 bg-black">
-        <a href="/">Go Back</a>
-        <h1>{show.value.title}</h1>
-        <div onClick={onPlay}>
-          Play Show
+      <div class="bg-black">
+        <div class="container mx-auto p-4 py-8">
+          {show.value!.chapters.map((chapter) => (
+            <ChapterRow
+              chapter={chapter}
+            />
+          ))}
         </div>
-        {show.value!.chapters.map((chapter) => (
-          <ChapterRow
-            chapter={chapter}
-          />
-        ))}
       </div>
     </>
   );

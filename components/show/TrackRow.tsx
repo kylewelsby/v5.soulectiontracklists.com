@@ -17,7 +17,7 @@ export default function TrackRow(
   return (
     <a
       href={href}
-      class="flex flex-row items-center justify-center p-3 text-lg transition-colors duration-1000 transition dark:hover:bg-gray-800"
+      class="flex flex-row items-center justify-center py-4 text-lg transition-colors duration-1000 transition dark:hover:bg-gray-800"
     >
       <div class="h-20 w-20 mr-6 relative rounded">
         <Artwork

@@ -27,7 +27,7 @@ export default function Discover(props: Data) {
   }
 
   return (
-    <div>
+    <div class="container mx-auto px-5">
       <SiteSubNav title="Tracklists">
         <SiteSubNavLink href="/tracklists/">All</SiteSubNavLink>
         <SiteSubNavLink href="/tracklists/t/soulection-radio/">
