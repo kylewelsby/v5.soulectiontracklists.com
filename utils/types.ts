@@ -30,6 +30,7 @@ export type Show = {
   media: ShowLinks;
   content: string;
   excerpt?: string;
+  location: string;
   published_at: string;
   chapters: Chapter[];
 };
@@ -38,12 +39,15 @@ export type Chapter = {
   id: string;
   title: string;
   content: string;
+  artwork: string;
   markers?: Marker[];
 };
 
 export type Marker = {
+  id: string;
   timestamp: string;
   position: number;
+  msTimestamp: number;
   tracks?: Track;
   rawTrack: string;
 };

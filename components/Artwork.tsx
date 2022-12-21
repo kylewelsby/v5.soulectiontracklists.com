@@ -1,11 +1,18 @@
 import { IKImage } from "imagekitio-react";
 
 export default function Artwork(
-  props: { src: string; alt: string; size?: number },
+  props: { src: string; alt: string; size?: number; style?: string },
 ) {
-  const { src, alt, size = 24 } = props;
+  const { alt, size = 24 } = props;
 
-  const names = ["min-w", "max-w", "min-h", "max-h", "md:min-w", "md:min-h"];
+  const names = [
+    `min-w[${size}px]`,
+    `max-w[${size}px]`,
+    `min-h[${size}px]`,
+    `max-h[${size}px]`,
+    `md:min-w[${size}px]`,
+    `md:min-h[${size}px]`,
+  ];
   const classes = [
     "inline-block",
     "object-cover",
@@ -23,23 +30,25 @@ export default function Artwork(
   return (
     <div
       className={classes.join(" ")}
+      {...{ style: props.style }}
     >
       <IKImage
         path={presrc}
         alt={alt}
         transformation={[
           {
-            height: "128",
-            width: "128",
+            height: (size).toFixed(0),
+            width: (size).toFixed(0),
             ar: "1:1",
+            dpr: "auto",
             c: "maintain_ratio",
             fo: "auto",
           },
         ]}
         lqip={{ active: true, quality: 20 }}
         loading="lazy"
-        width={128}
-        height={128}
+        width={size}
+        height={size}
         urlEndpoint="https://ik.imagekit.io/29e7mvzdh/soulection/"
       />
     </div>

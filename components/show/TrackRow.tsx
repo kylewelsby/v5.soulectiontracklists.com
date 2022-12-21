@@ -23,7 +23,7 @@ export default function TrackRow(
         <Artwork
           src={artwork ? artwork : "/default-artist.png"}
           alt={trackName}
-          size={20}
+          size={80}
         />
         {position !== undefined && (
           <span class="absolute bottom-0 right-0 bg-gray-800 rounded-full text-white text-xs font-bold px-2 py-1">

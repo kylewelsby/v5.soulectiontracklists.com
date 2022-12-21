@@ -43,10 +43,12 @@ export default function Audio({
   });
 
   useSignalEffect(() => {
-    if (seek.value <= 0) return;
+    if (queue.seekTo <= 0) return;
     if (audioRef.current === null) return;
 
-    audioRef.current.currentTime = seek.value;
+    console.log("seeking to", queue.seekTo);
+
+    audioRef.current.currentTime = queue.seekTo;
   });
 
   const onLoadUpdate = (event: Event) => {

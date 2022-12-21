@@ -18,7 +18,7 @@ export default function TracklistCard({ tracklist }: TracklistCardProps) {
       <Artwork
         src={tracklist.artwork}
         alt={tracklist.title}
-        size={32}
+        size={128}
       />
       <div class="ml-4 flex-grow min-w-0">
         <h4 class="mb-2">{tracklist.title}</h4>

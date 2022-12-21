@@ -1,6 +1,7 @@
 import { pool } from "@/utils/db.ts";
 import { Show, ShowLinks, SoundcloudTranscoding } from "@/utils/types.ts";
 import { render } from "$gfm";
+import { timeToSeconds } from "@/utils/timeToSeconds.ts";
 
 export default async function fetchShow(slug: string): Promise<Show> {
   const trackQuery = `SELECT
@@ -34,11 +35,16 @@ export default async function fetchShow(slug: string): Promise<Show> {
   const query = `SELECT
   s.id,
   s.title,
+  s.slug,
+  s.published_at,
   s.links,
+  s.artwork,
+  s.location,
   json_agg(
     json_build_object(
       'id', c.id,
       'title', c.title,
+      'artwork', c.artwork,
       'content', c.content,
       'markers',
       (${markersQuery})
@@ -68,11 +74,21 @@ ORDER BY m."position" ASC, c."position" ASC`;
 
   console.debug(result.query);
   const show = result.rows[0];
-  const chapters = show.chapters.map((chapter) => {
+  let chapters = show.chapters.map((chapter) => {
     chapter.content = render(chapter.content);
     return chapter;
   });
-  console.log(chapters[0].markers.length);
+  chapters = chapters.map((chapter) => {
+    chapter.markers!.sort((a, b) => {
+      if (a.position > b.position) return 1;
+      if (a.position < b.position) return -1;
+      return 0;
+    }).map((marker) => {
+      marker.msTimestamp = timeToSeconds(marker.timestamp);
+      return marker;
+    });
+    return chapter;
+  });
   show.chapters = chapters;
   return show;
 }

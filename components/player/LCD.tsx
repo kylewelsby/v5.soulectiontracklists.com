@@ -1,11 +1,23 @@
+import { Marker } from "@/utils/types.ts";
 interface LCDProps {
-  artist: string;
-  title: string;
+  marker: Marker;
 }
 export default function LCD(props: LCDProps) {
-  const { artist, title } = props;
+  const { marker } = props;
+  let title = null;
+  let artist = null;
+
+  if (!marker.tracks || !marker.tracks.artists) {
+    const parts = marker.rawTrack.split(" - ");
+    title = parts[1];
+    artist = parts[0];
+  } else {
+    title = marker.tracks.title;
+    artist = marker.tracks.artists.title;
+  }
+
   return (
-    <div class="flex flex-col whitespace-nowrap pl-8">
+    <div class="flex flex-row self-end justify-self-end whitespace-nowrap">
       <span class="text-white font-bold">
         {title}
       </span>

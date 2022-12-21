@@ -1,24 +1,18 @@
-import { useCallback } from "preact/hooks";
-import { batch } from "@preact/signals";
-import { playerPlaying, playerUrl } from "@/utils/state.ts";
+import { useContext } from "preact/hooks";
+import { PlayerQueue } from "@/utils/player_queue.ts";
+import { Show } from "@/utils/types.ts";
 
 interface PlayShopProps {
-  showSlug: string;
+  show: Show;
 }
 
 export default function PlayShow(props: PlayShopProps) {
-  const play = useCallback(async () => {
-    const resp = await fetch(`/api/shows/${props.showSlug}/soundcloud`);
-    const json = await resp.json();
-    batch(() => {
-      playerUrl.value = json.media;
-      playerPlaying.value = false;
-    });
-  }, [props.showSlug]);
+  const queue = useContext(PlayerQueue);
   return (
     <button
-      onClick={play}
+      onClick={queue.listenTo.bind(queue, props.show)}
       title="Show"
+      class="btn-white my-2"
     >
       <svg class="w-6 mr-2 fill-current" viewBox="0 0 24 25">
         <path
@@ -28,7 +22,7 @@ export default function PlayShow(props: PlayShopProps) {
         >
         </path>
       </svg>
-      Play
+      Play Show
     </button>
   );
 }

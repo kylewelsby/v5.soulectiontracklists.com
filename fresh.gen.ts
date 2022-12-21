@@ -13,8 +13,7 @@ import * as $6 from "./routes/tracklists/[slug]/index.tsx";
 import * as $7 from "./routes/tracklists/index.tsx";
 import * as $8 from "./routes/tracklists/t/[tag].tsx";
 import * as $$0 from "./islands/MusicRoutes.tsx";
-import * as $$1 from "./islands/PlayShow.tsx";
-import * as $$2 from "./islands/PlayerWidget.tsx";
+import * as $$1 from "./islands/PlayerWidget.tsx";
 
 const manifest = {
   routes: {
@@ -30,8 +29,7 @@ const manifest = {
   },
   islands: {
     "./islands/MusicRoutes.tsx": $$0,
-    "./islands/PlayShow.tsx": $$1,
-    "./islands/PlayerWidget.tsx": $$2,
+    "./islands/PlayerWidget.tsx": $$1,
   },
   baseUrl: import.meta.url,
   config,

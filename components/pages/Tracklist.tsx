@@ -25,24 +25,27 @@ export default function Tracklist({ slug }: TracklistProps) {
     return <div>Loading</div>;
   }
 
-  const onPlay = async (e: MouseEvent) => {
+  const onPlay = (e: MouseEvent) => {
     e.preventDefault();
-    const resp = await fetch(`/api/shows/${slug}/soundcloud`);
-    const json = await resp.json();
-    const showNew = show as unknown as Show;
-    showNew.data = json.media;
+    const showNew = show.value as unknown as Show;
     queue.listenTo(showNew);
   };
 
   return (
-    <div class="prose prose(sm) sm:prose lg:prose-lg xl:prose-2xl mx-auto dark:prose-dark">
-      <a href="/">Go Back</a>
-      <h1>{show.value.title}</h1>
+    <>
       <TracklistHero show={show.value} />
-      <div onClick={onPlay}>
-        Play Show
+      <div class="container mx-auto p-4 py-8 bg-black">
+        <a href="/">Go Back</a>
+        <h1>{show.value.title}</h1>
+        <div onClick={onPlay}>
+          Play Show
+        </div>
+        {show.value!.chapters.map((chapter) => (
+          <ChapterRow
+            chapter={chapter}
+          />
+        ))}
       </div>
-      {show.value!.chapters.map((chapter) => <ChapterRow chapter={chapter} />)}
-    </div>
+    </>
   );
 }

@@ -3,7 +3,7 @@ import * as colors from "twind/colors";
 import { apply } from "twind";
 import { asset } from "$fresh/runtime.ts";
 
-const SIZES = [10, 12, 32, 48, 84];
+const SIZES = [10, 12, 32, 48, 84, 160];
 const whitelistSizes = [""];
 SIZES.forEach((size) => {
   whitelistSizes.push(`w-${size}`);
@@ -22,27 +22,43 @@ export default {
     extend: {
       minWidth: {
         12: "3rem",
+        16: "4rem",
+        18: "4.5rem",
         20: "5rem",
         24: "6rem",
         32: "8rem",
+        84: "42rem",
+        160: "80rem",
       },
       minHeight: {
         12: "3rem",
+        16: "4rem",
+        18: "4.5rem",
         20: "5rem",
         24: "6rem",
         32: "8rem",
+        84: "42rem",
+        160: "80rem",
       },
       maxWidth: {
         12: "3rem",
+        16: "4rem",
+        18: "4.5rem",
         20: "5rem",
         24: "6rem",
         32: "8rem",
+        84: "42rem",
+        160: "80rem",
       },
       maxHeight: {
         12: "3rem",
+        16: "4rem",
+        18: "4.5rem",
         20: "5rem",
         24: "6rem",
         32: "8rem",
+        84: "42rem",
+        160: "80rem",
       },
       spacing: {
         72: "18rem",
@@ -87,7 +103,9 @@ export default {
         fontStyle: "normal",
         fontWeight: "normal",
         src: `local('Conthrax SemiBold'), url('${
-          asset("/fonts/conthrax-sb.woff")
+          asset(
+            "/fonts/conthrax-sb.woff",
+          )
         }') format('woff')`,
         fontDisplay: "swap",
       },
@@ -110,7 +128,7 @@ export default {
     h6: apply`font(bold) text(white sm)`,
   },
   plugins: {
-    "btn": apply`
+    btn: apply`
       inline-flex
       items-center
       px-5 py-2
@@ -123,6 +141,20 @@ export default {
       shadow-sm
       hover:(bg-gray-800)
       focus:(outline-none ring-2 ring-offset-2 ring-gray-700)
+    `,
+    "btn-white": apply`
+      bg-white
+      transition
+      rounded-full
+      text(black sm)
+      px-6
+      py-2
+      font-medium
+      flex
+      flex-row
+      justify-center
+      items-center
+      hover:(bg-gray-200)
     `,
   },
 } as unknown as Options;
