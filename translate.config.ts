@@ -8,6 +8,7 @@ export default {
         "amazonMusic": "Amazon Music",
         "appleMusic": "Apple Music",
         "audioMack": "Audiomack",
+        "audiomack": "Audiomack",
         "audius": "Audius",
         "bandcamp": "Bandcamp",
         "beatport": "Beatport",
