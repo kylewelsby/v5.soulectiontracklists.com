@@ -5,16 +5,15 @@
 import config from "./deno.json" assert { type: "json" };
 import * as $0 from "./routes/_404.tsx";
 import * as $1 from "./routes/_app.tsx";
-import * as $2 from "./routes/_middleware.ts";
-import * as $3 from "./routes/api/shows/[slug]/index.ts";
-import * as $4 from "./routes/api/shows/[slug]/soundcloud.ts";
-import * as $5 from "./routes/api/shows/index.ts";
-import * as $6 from "./routes/api/tracks/[id].ts";
-import * as $7 from "./routes/index.tsx";
-import * as $8 from "./routes/tracklists/[slug]/index.tsx";
-import * as $9 from "./routes/tracklists/index.tsx";
-import * as $10 from "./routes/tracklists/t/[tag].tsx";
-import * as $11 from "./routes/tracks/[id].tsx";
+import * as $2 from "./routes/api/shows/[slug]/index.ts";
+import * as $3 from "./routes/api/shows/[slug]/soundcloud.ts";
+import * as $4 from "./routes/api/shows/index.ts";
+import * as $5 from "./routes/api/tracks/[id].ts";
+import * as $6 from "./routes/index.tsx";
+import * as $7 from "./routes/tracklists/[slug]/index.tsx";
+import * as $8 from "./routes/tracklists/index.tsx";
+import * as $9 from "./routes/tracklists/t/[tag].tsx";
+import * as $10 from "./routes/tracks/[id].tsx";
 import * as $$0 from "./islands/MusicRoutes.tsx";
 import * as $$1 from "./islands/PlayerWidget.tsx";
 
@@ -22,16 +21,15 @@ const manifest = {
   routes: {
     "./routes/_404.tsx": $0,
     "./routes/_app.tsx": $1,
-    "./routes/_middleware.ts": $2,
-    "./routes/api/shows/[slug]/index.ts": $3,
-    "./routes/api/shows/[slug]/soundcloud.ts": $4,
-    "./routes/api/shows/index.ts": $5,
-    "./routes/api/tracks/[id].ts": $6,
-    "./routes/index.tsx": $7,
-    "./routes/tracklists/[slug]/index.tsx": $8,
-    "./routes/tracklists/index.tsx": $9,
-    "./routes/tracklists/t/[tag].tsx": $10,
-    "./routes/tracks/[id].tsx": $11,
+    "./routes/api/shows/[slug]/index.ts": $2,
+    "./routes/api/shows/[slug]/soundcloud.ts": $3,
+    "./routes/api/shows/index.ts": $4,
+    "./routes/api/tracks/[id].ts": $5,
+    "./routes/index.tsx": $6,
+    "./routes/tracklists/[slug]/index.tsx": $7,
+    "./routes/tracklists/index.tsx": $8,
+    "./routes/tracklists/t/[tag].tsx": $9,
+    "./routes/tracks/[id].tsx": $10,
   },
   islands: {
     "./islands/MusicRoutes.tsx": $$0,
