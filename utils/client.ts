@@ -2,7 +2,7 @@ import { createContext } from "preact";
 import { useContext, useMemo } from "preact/hooks";
 import { batch, useSignal } from "@preact/signals";
 import useSWR from "swr";
-import { Show } from "@/utils/types.ts";
+import { Show, Track } from "@/utils/types.ts";
 
 import type { PreloadData } from "@/utils/types.ts";
 
@@ -21,12 +21,16 @@ export function useTracklists(rawTags?: string) {
   return useSWRSignal<readonly Show[]>("/api/shows");
 }
 
+export function useTrack(id: string) {
+  return useSWRSignal<Track>(`/api/tracks/${id}`);
+}
+
 export interface ResponseSignal<T> {
   readonly data: T | undefined;
   readonly error: Error | undefined;
 }
 
-function useSWRSignal<T>(endpoint: string): ResponseSignal<T> {
+function useSWRSignal<T extends any>(endpoint: string): ResponseSignal<T> {
   const data = useSignal<T | undefined>(undefined);
   const error = useSignal<T | undefined>(undefined);
   const fallback = useContext(Fallback);
@@ -65,5 +69,5 @@ function useSWRSignal<T>(endpoint: string): ResponseSignal<T> {
     get error() {
       return error.value;
     },
-  }), [data, error]) as ResponseSignal<T>;
+  }), [data, error]) as { data: T | undefined; error: Error };
 }

@@ -12,7 +12,7 @@ export default function MusicBrowser({ url, initial }: MusicBrowserProps) {
   return (
     <div class="relative antialiased text-opacity-90 dark:(bg-[#151515] text-whire dark:text-opacity-90)">
       <SiteNav />
-      <main class="w-full">
+      <main class="w-full pb-[64px]">
         <MusicRoutes url={url} initial={initial} />
       </main>
       <PlayerWidget />

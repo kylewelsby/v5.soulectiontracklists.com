@@ -17,7 +17,8 @@
     "preact-router": "https://esm.sh/v99/*preact-router@4.1.0",
     "preact-router/": "https://esm.sh/v99/*preact-router@4.1.0/",
     "preact": "https://esm.sh/v99/preact@10.11.3",
-    "preact/": "https://esm.sh/v99/preact@10.11.3/"
+    "preact/": "https://esm.sh/v99/preact@10.11.3/",
+    "freshlate": "https://deno.land/x/freshlate@0.4.0/mod.ts"
   },
   "scopes": {}
 }

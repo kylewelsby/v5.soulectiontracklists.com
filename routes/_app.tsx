@@ -5,7 +5,8 @@ export default function App({ Component }: AppProps) {
   return (
     <>
       <Head>
-        <meta http-equiv="Accept-CH" content="DPR, Width, Save-Data" />
+        <meta http-equiv="Accept-CH" content="dpr,width,save-data" />
+        <title>Soulection</title>
         <link rel="icon" href={asset("/favicon.ico")} type="image/x-icon" />
         <link
           rel="preload"

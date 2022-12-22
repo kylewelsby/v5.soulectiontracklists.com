@@ -6,6 +6,7 @@ import { FallbackProvider } from "@/utils/client.ts";
 
 import Discover from "@/components/pages/Discover.tsx";
 import Tracklist from "@/components/pages/Tracklist.tsx";
+import TrackPage from "@/components/pages/Track.tsx";
 
 interface MusicRouteProps {
   url?: string;
@@ -21,6 +22,7 @@ export default function MusicRoutes({ url, initial = {} }: MusicRouteProps) {
           <Route path="/tracklists/" component={Discover} />
           <Route path="/tracklists/t/:tag" component={Discover} />
           <Route path="/tracklists/:slug" component={Tracklist} />
+          <Route path="/tracks/:id" component={TrackPage} />
         </Router>
       </FallbackProvider>
     </div>

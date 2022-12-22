@@ -58,6 +58,17 @@ export type Track = {
   slug: string;
   artists: Artist;
   artwork: string;
+  playCount: number;
+  shows: Show[];
+  links: TrackLink[];
+};
+
+export type TrackLink = {
+  id: number;
+  platform: string;
+  href: string;
+  artwork: string;
+  lastCheckedAt: string;
 };
 
 export type Artist = {
@@ -83,6 +94,7 @@ export type SoundcloudTranscodingFormat = {
 export interface PreloadData {
   readonly [key: string]:
     | Show
+    | Track
     | readonly Show[]
     | undefined;
 }

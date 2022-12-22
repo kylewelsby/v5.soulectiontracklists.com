@@ -1,3 +1,5 @@
+import { Head } from "$fresh/runtime.ts";
+
 import { Handlers, PageProps } from "$fresh/server.ts";
 import fetchShow from "@/utils/soulection/fetchShow.ts";
 
@@ -21,5 +23,12 @@ interface ShowData {
 }
 
 export default function Tracklist({ url, data }: PageProps<ShowData>) {
-  return <MusicBrowser url={url.pathname} initial={data} />;
+  return (
+    <>
+      <Head>
+        <title>Show</title>
+      </Head>
+      <MusicBrowser url={url.pathname} initial={data} />
+    </>
+  );
 }
