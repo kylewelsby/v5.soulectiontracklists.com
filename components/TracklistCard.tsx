@@ -19,6 +19,7 @@ export default function TracklistCard({ tracklist }: TracklistCardProps) {
         src={tracklist.artwork}
         alt={tracklist.title}
         size={128}
+        named="s_list_item_square"
       />
       <div class="ml-4 flex-grow min-w-0">
         <h4 class="mb-2">{tracklist.title}</h4>

@@ -1,5 +1,6 @@
 import { useComputed } from "@preact/signals";
 import { useTrack } from "@/utils/client.ts";
+import Loading from "@/components/Loading.tsx";
 import TrackHero from "@/components/Track/TrackHero.tsx";
 import SVGIcon from "@/components/SVG/SVGIcon.tsx";
 import { Track } from "@/utils/types.ts";
@@ -16,7 +17,7 @@ export default function TrackPage({ id }: Props) {
   const track = details.data;
 
   if (track === null || track === undefined) {
-    return <div>Loading</div>;
+    return <Loading />;
   }
 
   const platforms = [

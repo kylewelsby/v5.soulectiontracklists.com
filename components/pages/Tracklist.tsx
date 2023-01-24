@@ -4,6 +4,7 @@ import { PlayerQueue } from "@/utils/player_queue.ts";
 import { useComputed } from "@preact/signals";
 import { Show } from "@/utils/types.ts";
 
+import Loading from "@/components/Loading.tsx";
 import ChapterRow from "@/components/show/ChapterRow.tsx";
 import TracklistHero from "@/components/show/TracklistHero.tsx";
 
@@ -22,7 +23,7 @@ export default function Tracklist({ slug }: TracklistProps) {
   const show = useComputed(() => details.data);
 
   if (show.value === null || show.value === undefined) {
-    return <div>Loading</div>;
+    return <Loading />;
   }
 
   const onPlay = (e: MouseEvent) => {

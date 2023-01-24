@@ -1,7 +1,16 @@
 import { IKImage } from "imagekitio-react";
+interface Transformation {
+  [key: string]: string;
+}
 
 export default function Artwork(
-  props: { src: string; alt: string; size?: number; style?: string },
+  props: {
+    src: string;
+    alt: string;
+    size?: number;
+    style?: string;
+    named?: string;
+  },
 ) {
   const { alt, size = 24 } = props;
 
@@ -27,6 +36,17 @@ export default function Artwork(
   }
 
   const presrc = "/" + props.src;
+
+  const transformation = {
+    height: (size).toFixed(0),
+    width: (size).toFixed(0),
+    ar: "1:1",
+    dpr: "auto",
+    c: "maintain_ratio",
+    fo: "auto",
+    q: "60",
+  };
+
   return (
     <div
       className={classes.join(" ")}
@@ -35,16 +55,7 @@ export default function Artwork(
       <IKImage
         path={presrc}
         alt={alt}
-        transformation={[
-          {
-            height: (size).toFixed(0),
-            width: (size).toFixed(0),
-            ar: "1:1",
-            dpr: "auto",
-            c: "maintain_ratio",
-            fo: "auto",
-          },
-        ]}
+        transformation={[transformation, { named: props.named }]}
         lqip={{ active: true, quality: 20 }}
         loading="lazy"
         width={size}
