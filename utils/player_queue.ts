@@ -74,6 +74,10 @@ export class PlayerQueueSignal {
     );
   });
 
+  get canPlay() {
+    return this.#canPlay.value;
+  }
+
   get current() {
     return this.#current.value;
   }

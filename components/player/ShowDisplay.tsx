@@ -48,7 +48,7 @@ export default function ShowDisplay(props: ShowDisplayProps) {
           )}
         </div>
       </div>
-      <div class="lg:(flex w-5/12) hidden order-3 justify-end overflow(hidden ellipsis)">
+      <div class="lg:(flex w-5/12) order-3 justify-end overflow(hidden ellipsis)">
         <div class="flex flex(row nowrap grow) min-w-0 items-center justify-end lg:mr-4">
           {marker && (
             <LCD

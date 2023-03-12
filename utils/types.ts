@@ -32,6 +32,7 @@ export type Show = {
   excerpt?: string;
   location: string;
   published_at: string;
+  formattedDate: string;
   chapters: Chapter[];
 };
 
@@ -89,6 +90,23 @@ export type SoundcloudTranscoding = {
 export type SoundcloudTranscodingFormat = {
   protocol: string;
   mime_type: string;
+};
+
+export type Supply = {
+  title: string;
+  artwork: string;
+};
+
+export type Album = {
+  title: string;
+  slug: string;
+  artwork: string;
+};
+export type Discovery = {
+  show: Show;
+  album: Album;
+  event: Show;
+  supply: Supply;
 };
 
 export interface PreloadData {

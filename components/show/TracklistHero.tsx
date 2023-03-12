@@ -27,8 +27,8 @@ export default function TracklistHero({ show }: TracklistHeroProps) {
               {show.title}
             </h1>
             <div class="my-2 text-lg font-medium flex flex-col items-start md:(flex-row items-center)">
-              <span class="inline-block pr-2 py-1">{formattedDate}</span>
-              &bull;
+              <span class="inline-block py-1">{formattedDate}</span>
+              <span class="mx-2">&bull;</span>
               <span class="text-opacity-70 inline py-1">
                 Live from {location}
               </span>
@@ -55,7 +55,11 @@ export default function TracklistHero({ show }: TracklistHeroProps) {
               </div>
             </div>
           </div>
-          {show.content}
+        </div>
+        <div
+          class="conteiner pb-10"
+        >
+          <div class="mx-4" dangerouslySetInnerHTML={{ __html: show.content }}/>
         </div>
       </div>
     </div>

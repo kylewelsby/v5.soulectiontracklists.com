@@ -28,8 +28,32 @@ export default function PlayerWidget() {
 
   const marker = queue.currentMarker;
 
+  console.debug('Player Open?', queue.canPlay)
+
+  const toggleClass = (show) ? "translate-y-0" : "translate-y-full";
+  const classNames = `
+  fixed
+  z-10
+  bottom-0
+  right-0
+  left-0
+  bg-gray-900
+  text(white)
+  w-full
+  flex
+  flex(row wrap)
+  justify-center
+  items-center
+  shadow-lg
+  p-4
+  lg:(p-0 flex-nowrap)
+  transition-translate
+  ${toggleClass}`
+
   return (
-    <div class="fixed bottom-0 right-0 left-0 bg-gray-900 text(white) w-full flex flex(row wrap) justify-center items-center shadow-lg p-4 lg:(p-0 flex-nowrap)">
+    <div
+      className={classNames}
+    >
       <Controls />
       {(show) && <ShowDisplay show={show} chapter={chapter} marker={marker} />}
       <Audio

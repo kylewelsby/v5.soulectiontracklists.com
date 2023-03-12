@@ -2,8 +2,14 @@ import { pool } from "@/utils/db.ts";
 import { Show, ShowLinks, SoundcloudTranscoding } from "@/utils/types.ts";
 import { render } from "$gfm";
 import { timeToSeconds } from "@/utils/timeToSeconds.ts";
+import fetchTracklists from "@/utils/soulection/fetchTracklists.ts";
 
 export default async function fetchShow(slug: string): Promise<Show> {
+
+  if (slug === "HEAD") {
+    const tracklists = await fetchTracklists();
+    slug = tracklists[0].slug;
+  }
   const trackQuery = `SELECT
     tracks.id,
     tracks.title,
@@ -40,6 +46,7 @@ export default async function fetchShow(slug: string): Promise<Show> {
   s.links,
   s.artwork,
   s.location,
+  s.content,
   json_agg(
     json_build_object(
       'id', c.id,
@@ -59,7 +66,8 @@ ORDER BY m."position" ASC, c."position" ASC`;
   const connection = await pool.connect();
   let result;
   try {
-    const start = Date.now();
+    const logLabel = `🗃️ 'fetchShow' Query took`;
+    console.time(logLabel);
     result = await connection.queryObject<Show>({
       text: query,
       args: {
@@ -67,13 +75,22 @@ ORDER BY m."position" ASC, c."position" ASC`;
         profile: "QiEFFErt688",
       },
     });
-    console.log(`🗃️ Query took ${Date.now() - start}ms`);
+    console.timeEnd(logLabel);
   } finally {
     connection.release();
   }
 
-  console.debug(result.query);
   const show = result.rows[0];
+
+  const excerpt = show.content.split("<!--more-->")[0].trim();
+  show.excerpt = render(excerpt)
+    .replace(/<a /g, "<span ")
+    .replace(/<\/a>/g, "</span>");
+
+  const formattedDate = new Intl.DateTimeFormat("en-US", { dateStyle: "long" })
+    .format(Date.parse(show.published_at));
+  show.formattedDate = formattedDate;
+
   let chapters = show.chapters.map((chapter) => {
     chapter.content = render(chapter.content);
     return chapter;

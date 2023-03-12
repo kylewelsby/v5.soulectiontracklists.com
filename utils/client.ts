@@ -11,6 +11,9 @@ const Fallback = createContext<PreloadData>({});
 export const FallbackProvider = Fallback.Provider;
 
 export function useTracklist(slug: string) {
+  if (!slug) {
+    slug = "HEAD";
+  }
   return useSWRSignal<Show>(`/api/shows/${slug}`);
 }
 

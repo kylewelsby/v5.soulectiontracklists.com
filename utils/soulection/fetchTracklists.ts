@@ -23,12 +23,16 @@ export default async function fetchTracklists(
   const query = `SELECT title, published_at, tags, slug, artwork, content
   FROM shows
   WHERE tags && ARRAY[${tags.join(",")}]
+  AND state = 'published'
   ORDER BY published_at DESC
   LIMIT 50`;
   const connection = await pool.connect();
   let result;
   try {
+    const logLabel = `🗃️ 'fetchTracklists' Query took`;
+    console.time(logLabel);
     result = await connection.queryObject<Show>(query);
+    console.timeEnd(logLabel);
   } finally {
     connection.release();
   }
