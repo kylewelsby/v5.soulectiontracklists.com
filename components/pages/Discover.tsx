@@ -14,7 +14,7 @@ export default function Discover() {
   return (
     <div class="flex flex-col items-stretch">
       {components.map((Component) => {
-        return <Component/>;
+        return <Component />;
       })}
     </div>
   );

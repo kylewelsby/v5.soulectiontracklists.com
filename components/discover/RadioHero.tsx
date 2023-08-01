@@ -16,7 +16,7 @@ export default function RadioHero() {
     return <Loading />;
   }
 
-  const show = tracklist.value
+  const show = tracklist.value;
 
   const href = `/tracklists/${show.slug}`;
 
@@ -30,10 +30,10 @@ export default function RadioHero() {
           <a href="/tracklists/" class="btn">All Tracklists</a>
         </div>
         <div class="text-gray-400 text-sm font-light">
-          Discover the artists and tracks palyed on Soulection Radio, Live Sets and Guest Sessions.
+          Discover the artists and tracks palyed on Soulection Radio, Live Sets
+          and Guest Sessions.
         </div>
         <div class="mt-4 flex flex-col md:flex-row md:items-center">
-
           <div class="md:w-1/2 lg:w-auto text-center md:text-left md:mr-4">
             <a href={href}>
               <Artwork
@@ -67,5 +67,5 @@ export default function RadioHero() {
         </div>
       </div>
     </div>
-  )
+  );
 }

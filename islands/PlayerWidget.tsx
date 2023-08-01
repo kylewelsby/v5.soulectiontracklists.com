@@ -28,7 +28,7 @@ export default function PlayerWidget() {
 
   const marker = queue.currentMarker;
 
-  console.debug('Player Open?', queue.canPlay)
+  console.debug("Player Open?", queue.canPlay);
 
   const toggleClass = (show) ? "translate-y-0" : "translate-y-full";
   const classNames = `
@@ -48,7 +48,7 @@ export default function PlayerWidget() {
   p-4
   lg:(p-0 flex-nowrap)
   transition-translate
-  ${toggleClass}`
+  ${toggleClass}`;
 
   return (
     <div

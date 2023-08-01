@@ -14,7 +14,7 @@ export const handler: Handlers<HomeData> = {
     const show = await fetchShow("HEAD");
 
     return ctx.render({
-      ['/api/shows/HEAD']: show ?? undefined,
+      ["/api/shows/HEAD"]: show ?? undefined,
     });
   },
 };

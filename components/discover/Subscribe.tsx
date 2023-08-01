@@ -18,7 +18,11 @@ export default function Subscribe() {
         </div>
         <div class="absolute z-10 top-0 left-0 bottom-0 right-0 flex flex-col items-center justify-center">
           <span className="flex flex-col lg:flex-row">
-            <a href="https://madmimi.com/signups/68317/join" class="btn" target="_blank">
+            <a
+              href="https://madmimi.com/signups/68317/join"
+              class="btn"
+              target="_blank"
+            >
               Subscribe to Radio Newsletter
             </a>
           </span>

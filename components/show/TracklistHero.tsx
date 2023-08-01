@@ -56,10 +56,11 @@ export default function TracklistHero({ show }: TracklistHeroProps) {
             </div>
           </div>
         </div>
-        <div
-          class="conteiner pb-10"
-        >
-          <div class="mx-4" dangerouslySetInnerHTML={{ __html: show.content }}/>
+        <div class="conteiner pb-10">
+          <div
+            class="mx-4"
+            dangerouslySetInnerHTML={{ __html: show.content }}
+          />
         </div>
       </div>
     </div>

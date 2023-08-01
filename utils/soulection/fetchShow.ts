@@ -5,7 +5,6 @@ import { timeToSeconds } from "@/utils/timeToSeconds.ts";
 import fetchTracklists from "@/utils/soulection/fetchTracklists.ts";
 
 export default async function fetchShow(slug: string): Promise<Show> {
-
   if (slug === "HEAD") {
     const tracklists = await fetchTracklists();
     slug = tracklists[0].slug;
