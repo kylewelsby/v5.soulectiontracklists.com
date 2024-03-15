@@ -138,8 +138,6 @@ export class PlayerQueueSignal {
       .then((json) => {
         show.data = json.media;
         const valid = isValidShow(show);
-        console.log("valid", valid);
-        console.log("show.data", show);
 
         if (!valid) return;
 

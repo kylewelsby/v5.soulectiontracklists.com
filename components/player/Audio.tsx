@@ -47,8 +47,6 @@ export default function Audio({
     if (queue.seekTo <= 0) return;
     if (audioRef.current === null) return;
 
-    console.log("seeking to", queue.seekTo);
-
     audioRef.current.currentTime = queue.seekTo;
   });
 
