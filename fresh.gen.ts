@@ -2,33 +2,34 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $0 from "./routes/_404.tsx";
-import * as $1 from "./routes/_app.tsx";
-import * as $2 from "./routes/api/shows/[slug]/soundcloud.ts";
-import * as $3 from "./routes/index.tsx";
-import * as $4 from "./routes/tracklists/[slug]/index.tsx";
-import * as $5 from "./routes/tracklists/index.tsx";
-import * as $6 from "./routes/tracklists/t/[tag].tsx";
-import * as $7 from "./routes/tracks/[id].tsx";
-import * as $$0 from "./islands/PlayShow.tsx";
-import * as $$1 from "./islands/PlayerWidget.tsx";
+import * as $_404 from "./routes/_404.tsx";
+import * as $_app from "./routes/_app.tsx";
+import * as $api_shows_slug_soundcloud from "./routes/api/shows/[slug]/soundcloud.ts";
+import * as $index from "./routes/index.tsx";
+import * as $tracklists_slug_index from "./routes/tracklists/[slug]/index.tsx";
+import * as $tracklists_index from "./routes/tracklists/index.tsx";
+import * as $tracklists_t_tag_ from "./routes/tracklists/t/[tag].tsx";
+import * as $tracks_id_ from "./routes/tracks/[id].tsx";
+import * as $PlayShow from "./islands/PlayShow.tsx";
+import * as $PlayerWidget from "./islands/PlayerWidget.tsx";
+import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
-    "./routes/_404.tsx": $0,
-    "./routes/_app.tsx": $1,
-    "./routes/api/shows/[slug]/soundcloud.ts": $2,
-    "./routes/index.tsx": $3,
-    "./routes/tracklists/[slug]/index.tsx": $4,
-    "./routes/tracklists/index.tsx": $5,
-    "./routes/tracklists/t/[tag].tsx": $6,
-    "./routes/tracks/[id].tsx": $7,
+    "./routes/_404.tsx": $_404,
+    "./routes/_app.tsx": $_app,
+    "./routes/api/shows/[slug]/soundcloud.ts": $api_shows_slug_soundcloud,
+    "./routes/index.tsx": $index,
+    "./routes/tracklists/[slug]/index.tsx": $tracklists_slug_index,
+    "./routes/tracklists/index.tsx": $tracklists_index,
+    "./routes/tracklists/t/[tag].tsx": $tracklists_t_tag_,
+    "./routes/tracks/[id].tsx": $tracks_id_,
   },
   islands: {
-    "./islands/PlayShow.tsx": $$0,
-    "./islands/PlayerWidget.tsx": $$1,
+    "./islands/PlayShow.tsx": $PlayShow,
+    "./islands/PlayerWidget.tsx": $PlayerWidget,
   },
   baseUrl: import.meta.url,
-};
+} satisfies Manifest;
 
 export default manifest;
