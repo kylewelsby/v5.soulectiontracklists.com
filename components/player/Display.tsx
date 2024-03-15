@@ -3,10 +3,10 @@ import { useContext } from "preact/hooks";
 import Controls from "@/components/player/Controls.tsx";
 import ShowDisplay from "@/components/player/ShowDisplay.tsx";
 
-import { PlayerQueue } from "@/utils/player_queue.ts";
+import { PlayerQueueContext } from "@/utils/playerQueue.ts";
 
 export default function Display() {
-  const queue = useContext(PlayerQueue);
+  const queue = useContext(PlayerQueueContext);
 
   if (queue.current == null) {
     return "";
@@ -17,6 +17,8 @@ export default function Display() {
       <Controls />
       <ShowDisplay
         show={queue.current}
+        chapter={queue.currentChapter}
+        marker={queue.currentMarker}
       />
     </div>
   );

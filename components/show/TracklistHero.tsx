@@ -1,4 +1,4 @@
-import PlayShow from "@/components/show/PlayShow.tsx";
+import PlayShow from "@/islands/PlayShow.tsx";
 import { Show } from "@/utils/types.ts";
 import Artwork from "@/components/Artwork.tsx";
 import locationByISOCode from "@/utils/locationByISOCode.ts";
@@ -21,6 +21,8 @@ export default function TracklistHero({ show }: TracklistHeroProps) {
             src={show.artwork}
             alt={show.title}
             size={320}
+            loading="eager"
+            named="s_home_hero"
           />
           <div class="lg:ml-10">
             <h1 class="tracking-tighter text-4xl font-semibold">

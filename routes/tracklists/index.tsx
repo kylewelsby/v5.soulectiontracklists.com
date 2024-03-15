@@ -1,24 +1,26 @@
-import { Handlers, PageProps } from "$fresh/server.ts";
+import { Head } from "$fresh/runtime.ts";
+import { RouteContext } from "$fresh/server.ts";
 import fetchTracklists from "@/utils/soulection/fetchTracklists.ts";
 
-import MusicBrowser from "@/components/MusicBrowser.tsx";
+import TracklistCard from "@/components/TracklistCard.tsx";
+import TracklistsNav from "@/components/show/TracklistsNav.tsx";
 
 import { Show } from "@/utils/types.ts";
 
-interface Data {
-  [key: string]: readonly Show[] | undefined;
-}
-
-export const handler: Handlers<Data> = {
-  async GET(_req, ctx) {
-    const shows = await fetchTracklists();
-
-    return ctx.render({
-      ["/api/shows"]: shows ?? undefined,
-    });
-  },
-};
-
-export default function TracklistsPage({ url, data }: PageProps<Data>) {
-  return <MusicBrowser url={url.pathname} initial={data} />;
+export default async function TracklistsPage(_req: Request, ctx: RouteContext) {
+  const shows = await fetchTracklists();
+  return (
+    <>
+      <Head>
+        <title>Tracklists</title>
+      </Head>
+      <div class="container mx-auto px-5">
+        <TracklistsNav />
+        <h2>All Tracklists</h2>
+        {shows.map((tracklist: Show) => <TracklistCard
+          tracklist={tracklist}
+        />)}
+      </div>
+    </>
+  );
 }

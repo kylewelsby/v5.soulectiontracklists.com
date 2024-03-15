@@ -1,23 +1,11 @@
 import { Show } from "@/utils/types.ts";
-import PlayShow from "@/components/show/PlayShow.tsx";
+import PlayShow from "@/islands/PlayShow.tsx";
 import Artwork from "@/components/Artwork.tsx";
-import Loading from "@/components/Loading.tsx";
-import { useTracklist } from "@/utils/client.ts";
-import { useComputed } from "@preact/signals";
 
-export default function RadioHero() {
-  const details = useTracklist();
-  if (details.error) {
-    return <div>Error</div>;
-  }
-  const tracklist = useComputed(() => details.data);
-
-  if (tracklist.value === null || tracklist.value === undefined) {
-    return <Loading />;
-  }
-
-  const show = tracklist.value;
-
+interface Props {
+  show: Show;
+}
+export default function RadioHero({show}: Props ) {
   const href = `/tracklists/${show.slug}`;
 
   return (

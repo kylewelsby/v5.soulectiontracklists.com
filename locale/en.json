@@ -1,0 +1,77 @@
+{
+  "episode": {
+    "singleChapter": "{markers} tracks",
+    "singleChapterWithInterview": "{markers} tracks with Interview",
+    "multiChapters": "{markers} tracks across {chapters} sets",
+    "multiChaptersWithInterview": "{markers} tracks across {chapters} sets with Interview"
+  },
+  "filter": {
+    "types": {
+      "solo": "Solo Show",
+      "takeover": "Takeover",
+      "peoples-choice": "Peoples Choice",
+      "discord": "Discord Edition",
+      "guest": "Guest Appearance",
+      "interview": "w/ Interview",
+      "missing": "Missing Tracklist",
+      "soulection-radio": "Soulection Radio",
+      "all-dayer": "All Day"
+    },
+    "titles": {
+      "all": "All Tracklists",
+      "solo": "Solo show with Joe Kay",
+      "solo_other": "Solo shows with Joe Kay",
+      "takeover": "Takeover Show",
+      "takeover_other": "Takeover Shows",
+      "peoples-choice": "The Peoples Choice Show",
+      "peoples-choice_other": "The Peoples Choice Shows",
+      "discord": "Discord Edition",
+      "discord_other": "Discord Editions",
+      "guest": "Shows with Guest",
+      "guest_other": "Shows with Guests",
+      "interview": "Shows with Interview",
+      "interview_other": "Shows with Interviews",
+      "missing": "Show missing Tracklists",
+      "missing_other": "Shows missing Tracklists",
+      "soulection-radio": "Soulection Radio Show",
+      "soulection-radio_other": "Soulection Radio Shows",
+      "specials": "Special Show",
+      "specials_other": "Special Shows",
+      "white-label": "White Label",
+      "white-label_other": "White Labels",
+      "black-label": "Black Labels",
+      "single": "Singles",
+      "album": "Albums",
+      "ep": "EPs",
+      "compilation": "Compilations"
+    }
+  },
+  "searchResults": {
+    "count": "No results found | 1 result found | {n} results found"
+  },
+  "linkCount": "No Links | 1 Link | {n} Links",
+  "tracklistAppearances": "No Tracklist Appearances | Played Once on {number} | {n} Tracklist Appearances (last on {number})",
+  "platforms": {
+    "amazonMusic": "Amazon Music",
+    "appleMusic": "Apple Music",
+    "audioMack": "Audiomack",
+    "audius": "Audius",
+    "bandcamp": "Bandcamp",
+    "beatport": "Beatport",
+    "bing": "Bing",
+    "deezer": "Deezer",
+    "discogs": "Discogs",
+    "duckduckgo": "DuckDuckGo",
+    "google": "Google",
+    "googleplaymusic": "Google Play Music",
+    "gumroad": "Gumroad (Download)",
+    "lastfm": "Last.fm",
+    "soundcloud": "SoundCloud",
+    "spotify": "Spotify",
+    "tidal": "Tidal",
+    "traxsource": "Traxsource",
+    "youtube": "YouTube",
+    "youtubeMusic": "YouTube Music",
+    "vimeo": "Vimeo"
+  }
+}

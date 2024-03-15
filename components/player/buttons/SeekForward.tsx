@@ -1,8 +1,8 @@
 import { useContext } from "preact/hooks";
-import { PlayerQueue } from "@/utils/player_queue.ts";
+import { usePlayerQueue } from "@/utils/playerQueue.ts";
 
 export default function SeekForward() {
-  const queue = useContext(PlayerQueue);
+  const queue = usePlayerQueue();
   return (
     <button
       title="Seek Forward"

@@ -13,6 +13,8 @@ export default function TrackHero({ track }: { track: Track }) {
             src={track.artwork}
             alt={formatedTitle}
             size={320}
+            loading="eager"
+            named="s_home_hero"
           />
           <div class="lg:ml-10">
             <h1 class="tracking-tighter text-4xl font-semibold">

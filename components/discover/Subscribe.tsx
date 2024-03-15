@@ -1,5 +1,3 @@
-import { IKImage } from "imagekitio-react";
-
 export default function Subscribe() {
   return (
     <div class="flex flex-col items-center">

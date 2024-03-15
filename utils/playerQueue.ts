@@ -1,4 +1,5 @@
 import { createContext } from "preact";
+import { useContext } from "preact/hooks";
 import { batch, computed, signal } from "@preact/signals";
 import type { Show } from "@/utils/types.ts";
 
@@ -9,6 +10,17 @@ export class PlayerQueueSignal {
   readonly #seekTo = signal(0);
 
   readonly #canPlay = computed(() => this.#current.value?.data !== undefined);
+
+  readonly #currentChapter = computed(() => {
+    if (!this.current) return undefined;
+    const chapters = this.current.chapters;
+    return (
+      chapters.find((chapter) => {
+        const firstMarker = chapter.markers![0];
+        return this.#position.value >= firstMarker.msTimestamp;
+      }) || chapters[0]
+    );
+  });
 
   readonly #currentMarker = computed(() => {
     if (!this.currentChapter) return undefined;
@@ -42,10 +54,9 @@ export class PlayerQueueSignal {
     if (!markers) return undefined;
 
     const index = markers.findIndex((marker) => {
-      console.log("marker", marker.id, this.currentMarker!.id);
       return marker.id == this.currentMarker!.id;
     });
-    console.log("index", index);
+
     return markers[index + 1];
   });
 
@@ -63,23 +74,12 @@ export class PlayerQueueSignal {
     return markers[index - 1];
   });
 
-  readonly #currentChapter = computed(() => {
-    if (!this.current) return undefined;
-    const chapters = this.current.chapters;
-    return (
-      chapters.find((chapter) => {
-        const firstMarker = chapter.markers![0];
-        return this.#position.value >= firstMarker.msTimestamp;
-      }) || chapters[0]
-    );
-  });
-
-  get canPlay() {
-    return this.#canPlay.value;
-  }
-
   get current() {
     return this.#current.value;
+  }
+
+  get currentChapter() {
+    return this.#currentChapter.value;
   }
 
   get currentMarker() {
@@ -94,20 +94,16 @@ export class PlayerQueueSignal {
     return this.#prevMarker.value;
   }
 
-  get currentChapter() {
-    return this.#currentChapter.value;
-  }
-
   get isPlaying() {
     return this.#isPlaying.value;
   }
 
-  get position() {
-    return this.#position.value;
-  }
-
   get seekTo() {
     return this.#seekTo.value;
+  }
+
+  get canPlay() {
+    return Boolean(this.#current.value?.data);
   }
 
   toggle() {
@@ -131,6 +127,10 @@ export class PlayerQueueSignal {
     this.#seekTo.value = this.nextMarker.msTimestamp;
   }
 
+  onProgress(progerss: number) {
+    this.#position.value = progerss;
+  }
+
   listenTo(show: Show) {
     if (this.#current.value?.slug === show.slug) return;
     fetch(`/api/shows/${show.slug}/soundcloud`)
@@ -138,6 +138,8 @@ export class PlayerQueueSignal {
       .then((json) => {
         show.data = json.media;
         const valid = isValidShow(show);
+        console.log("valid", valid);
+        console.log("show.data", show);
 
         if (!valid) return;
 
@@ -148,14 +150,14 @@ export class PlayerQueueSignal {
         });
       });
   }
-
-  onProgress(progress: number) {
-    this.#position.value = progress;
-  }
 }
 
 function isValidShow(show: Show) {
   return Boolean(show.data);
 }
 
-export const PlayerQueue = createContext(new PlayerQueueSignal());
+export const PlayerQueueContext = createContext(new PlayerQueueSignal());
+
+export function usePlayerQueue() {
+  return useContext(PlayerQueueContext);
+}

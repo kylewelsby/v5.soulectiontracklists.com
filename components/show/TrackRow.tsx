@@ -24,6 +24,7 @@ export default function TrackRow(
           src={artwork ? artwork : "/default-artist.png"}
           alt={trackName}
           size={63}
+          named="s_list_item_square"
         />
         {position !== undefined && (
           <span class="absolute bottom-0 right-0 bg-gray-800 rounded-full text-white text-xs font-bold px-2 py-1">

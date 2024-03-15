@@ -1,9 +1,9 @@
 import { useContext } from "preact/hooks";
 import { useComputed } from "@preact/signals";
-import { PlayerQueue } from "@/utils/player_queue.ts";
+import { usePlayerQueue } from "@/utils/playerQueue.ts";
 
 export default function Playback() {
-  const queue = useContext(PlayerQueue);
+  const queue = usePlayerQueue();
   const disabled = useComputed(() => queue.current === null);
 
   const title = useComputed(() => {

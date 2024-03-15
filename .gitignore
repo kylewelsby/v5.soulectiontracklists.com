@@ -1,2 +1,5 @@
 .env
 .history
+
+# Fresh build directory
+_fresh/

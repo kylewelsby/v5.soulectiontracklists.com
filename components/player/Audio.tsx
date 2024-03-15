@@ -7,7 +7,7 @@ import {
   useSignalEffect,
 } from "@preact/signals";
 
-import { PlayerQueue } from "@/utils/player_queue.ts";
+import { usePlayerQueue } from "@/utils/playerQueue.ts";
 
 interface AudioProps {
   seek: ReadonlySignal<number>;
@@ -24,7 +24,7 @@ export default function Audio({
 
   const isLoading = useSignal(true);
 
-  const queue = useContext(PlayerQueue);
+  const queue = usePlayerQueue();
   const src = useComputed(() => queue.current?.data ?? "");
 
   useSignalEffect(() => {
@@ -43,6 +43,7 @@ export default function Audio({
   });
 
   useSignalEffect(() => {
+    if (queue.seekTo === undefined) return;
     if (queue.seekTo <= 0) return;
     if (audioRef.current === null) return;
 

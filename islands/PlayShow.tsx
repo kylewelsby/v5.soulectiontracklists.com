@@ -1,5 +1,5 @@
 import { useContext } from "preact/hooks";
-import { PlayerQueue } from "@/utils/player_queue.ts";
+import { usePlayerQueue } from "@/utils/playerQueue.ts";
 import { Show } from "@/utils/types.ts";
 
 interface PlayShopProps {
@@ -7,7 +7,7 @@ interface PlayShopProps {
 }
 
 export default function PlayShow(props: PlayShopProps) {
-  const queue = useContext(PlayerQueue);
+  const queue = usePlayerQueue();
   return (
     <button
       onClick={queue.listenTo.bind(queue, props.show)}

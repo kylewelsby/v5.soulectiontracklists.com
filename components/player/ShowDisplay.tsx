@@ -26,6 +26,7 @@ export default function ShowDisplay(props: ShowDisplayProps) {
           alt={show.title}
           size={64}
           style="border-radius: 0px;"
+          named="s_playing"
         />
         <div class="w-4/5 ml-2 my-2 flex-grow flex flex-col">
           <a

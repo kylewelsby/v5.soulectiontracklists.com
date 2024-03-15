@@ -1,6 +1,5 @@
-import { useContext } from "preact/hooks";
 import { useSignal } from "@preact/signals";
-import { PlayerQueue } from "@/utils/player_queue.ts";
+import { usePlayerQueue } from "@/utils/playerQueue.ts";
 
 import Audio from "@/components/player/Audio.tsx";
 import Controls from "@/components/player/Controls.tsx";
@@ -20,7 +19,7 @@ export default function PlayerWidget() {
     duration.value = value;
   };
 
-  const queue = useContext(PlayerQueue);
+  const queue = usePlayerQueue();
 
   const show = queue.current;
 
@@ -30,7 +29,7 @@ export default function PlayerWidget() {
 
   console.debug("Player Open?", queue.canPlay);
 
-  const toggleClass = (show) ? "translate-y-0" : "translate-y-full";
+  const toggleClass = show ? "translate-y-0" : "translate-y-full";
   const classNames = `
   fixed
   z-10
@@ -55,7 +54,7 @@ export default function PlayerWidget() {
       className={classNames}
     >
       <Controls />
-      {(show) && <ShowDisplay show={show} chapter={chapter} marker={marker} />}
+      {show && <ShowDisplay show={show} chapter={chapter} marker={marker} />}
       <Audio
         seek={seek}
         onProgress={onProgress}

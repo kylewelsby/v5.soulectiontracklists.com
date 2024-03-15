@@ -1,4 +1,3 @@
-import { IKImage } from "imagekitio-react";
 interface Transformation {
   [key: string]: string;
 }
@@ -10,9 +9,10 @@ export default function Artwork(
     size?: number;
     style?: string;
     named?: string;
+    loading?: "lazy" | "eager";
   },
 ) {
-  const { alt, size = 24 } = props;
+  const { alt, size = 24, loading = "lazy" } = props;
 
   const names = [
     `min-w[${size}px]`,
@@ -35,32 +35,19 @@ export default function Artwork(
     classes.push(`${name}-${size}`);
   }
 
-  const presrc = "/" + props.src;
-
-  const transformation = {
-    height: (size).toFixed(0),
-    width: (size).toFixed(0),
-    ar: "1:1",
-    dpr: "auto",
-    c: "maintain_ratio",
-    fo: "auto",
-    q: "60",
-  };
+  const url = "https://ik.imagekit.io/29e7mvzdh/soulection/" + props.src +"?tr=n-" + props.named;
 
   return (
     <div
       className={classes.join(" ")}
       {...{ style: props.style }}
     >
-      <IKImage
-        path={presrc}
+      <img
+        src={url}
+        loading={loading}
         alt={alt}
-        transformation={[transformation, { named: props.named }]}
-        lqip={{ active: true, quality: 20 }}
-        loading="lazy"
         width={size}
         height={size}
-        urlEndpoint="https://ik.imagekit.io/29e7mvzdh/soulection/"
       />
     </div>
   );
