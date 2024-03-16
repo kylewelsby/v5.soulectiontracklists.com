@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Conthrax SemiBold';
+  font-style: normal;
+  font-weight: ormal;
+  font-display: swap;
+  src: local('Conthrax SemiBold'), url('/fonts/Conthrax-SemiBold.woff2') format('woff2');
+}
+body {
+  @apply bg-[#151515] text-white;
+}
+a {
+  @apply text-gray-100;
+  text-decoration: inherit;
+  &:hover {
+    @apply text-white;
+  }
+}
+
+p a {
+  @apply text-sm underline;
+}
+h1{
+  @apply font-bold text-white text-3xl;
+}
+h2{
+  @apply font-normal text-white text-2xl;
+}
+h3{
+  @apply font-bold text-white text-xl;
+}
+h4{
+  @apply font-bold text-white text-lg;
+}
+h5{
+  @apply font-bold text-white text-base;
+}
+h6 {
+  @apply font-bold text-white text-sm;
+}
+
+
+.btn {
+  @apply inline-flex items-center px-5 py-2 border border-transparent text-base text-white font-medium bg-gray-700 rounded-full shadow-sm hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700;
+}
+
+.btn-white {
+  @apply bg-white transition rounded-full text-black text-sm px-6 py-2 font-medium flex flex-row justify-center items-center hover:bg-gray-200;
+}

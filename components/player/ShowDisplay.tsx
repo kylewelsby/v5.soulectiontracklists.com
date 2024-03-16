@@ -20,7 +20,7 @@ export default function ShowDisplay(props: ShowDisplayProps) {
 
   return (
     <>
-      <div class="w-4/5 order-2 flex-grow flex flex-row items-center lg:(!w-5/12 !order-1)">
+      <div class="w-4/5 order-2 flex-grow flex flex-row items-center lg:!w-5/12 lg:!order-1">
         <Artwork
           src={artwork}
           alt={show.title}
@@ -49,8 +49,8 @@ export default function ShowDisplay(props: ShowDisplayProps) {
           )}
         </div>
       </div>
-      <div class="lg:(flex w-5/12) order-3 justify-end overflow(hidden ellipsis)">
-        <div class="flex flex(row nowrap grow) min-w-0 items-center justify-end lg:mr-4">
+      <div class="lg:flex lg:w-5/12 order-3 justify-end overflow-hidden overflow-ellipsis">
+        <div class="flex flex-row flex-nowrap flex-grow min-w-0 items-center justify-end lg:mr-4">
           {marker && (
             <LCD
               marker={marker}

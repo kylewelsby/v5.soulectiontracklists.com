@@ -37,15 +37,17 @@ export default function PlayerWidget() {
   right-0
   left-0
   bg-gray-900
-  text(white)
+  text-white
   w-full
   flex
-  flex(row wrap)
+  flex-row
+  flex-wrap
   justify-center
   items-center
   shadow-lg
   p-4
-  lg:(p-0 flex-nowrap)
+  lg:p-0
+  lg:flex-nowrap
   transition-translate
   ${toggleClass}`;
 

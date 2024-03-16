@@ -4,7 +4,7 @@ import SeekBackward from "@/components/player/buttons/SeekBackward.tsx";
 
 export default function Controls() {
   return (
-    <div class="w-full order-1 py-2 flex flex-row justify-center lg:(w-2/12 order-2) ">
+    <div class="w-full order-1 py-2 flex flex-row justify-center lg:w-2/12 lg:order-2">
       <SeekBackward />
       <Playback />
       <SeekForward />

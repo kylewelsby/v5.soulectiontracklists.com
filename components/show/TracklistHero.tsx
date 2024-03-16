@@ -16,7 +16,7 @@ export default function TracklistHero({ show }: TracklistHeroProps) {
   return (
     <div class="to-black from-transparent bg-gradient-to-b">
       <div class="container mx-auto">
-        <div class="flex flex-col lg:(flex-row items-center py-8) py-6 self-start mx-4">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:py-8 py-6 self-start mx-4">
           <Artwork
             src={show.artwork}
             alt={show.title}
@@ -28,7 +28,7 @@ export default function TracklistHero({ show }: TracklistHeroProps) {
             <h1 class="tracking-tighter text-4xl font-semibold">
               {show.title}
             </h1>
-            <div class="my-2 text-lg font-medium flex flex-col items-start md:(flex-row items-center)">
+            <div class="my-2 text-lg font-medium flex flex-col items-start md:flex-row md:items-center">
               <span class="inline-block py-1">{formattedDate}</span>
               <span class="mx-2">&bull;</span>
               <span class="text-opacity-70 inline py-1">

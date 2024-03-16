@@ -13,7 +13,7 @@ export default function Display() {
   }
 
   return (
-    <div class="fixed bottom-0 bg-gray-900 text-gray-300 w-full left-0 right-0 flex flex-row items-center flex-wrap shadow-lg p-4 lg:(p-0 flex-nowrap)">
+    <div class="fixed bottom-0 bg-gray-900 text-gray-300 w-full left-0 right-0 flex flex-row items-center flex-wrap shadow-lg p-4 lg:p-0 lg:flex-nowrap">
       <Controls />
       <ShowDisplay
         show={queue.current}

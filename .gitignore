@@ -1,5 +1,6 @@
 .env
 .history
-
+node_modules/
 # Fresh build directory
 _fresh/
+
