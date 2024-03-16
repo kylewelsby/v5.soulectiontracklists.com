@@ -25,6 +25,9 @@ jobs:
 
       - name: Build step
         run: "deno task build" # 📝 Update the build command(s) if necessary
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          SOUNDCLOUD_CLIENT_ID: ${{ secrets.SOUNDCLOUD_CLIENT_ID }}
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
