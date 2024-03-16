@@ -35,7 +35,8 @@ export default function Artwork(
     classes.push(`${name}-${size}`);
   }
 
-  const url = "https://ik.imagekit.io/29e7mvzdh/soulection/" + props.src +"?tr=n-" + props.named;
+  const url = "https://ik.imagekit.io/29e7mvzdh/soulection/" + props.src +
+    "?tr=n-" + props.named;
 
   return (
     <div

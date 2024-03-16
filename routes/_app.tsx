@@ -21,7 +21,7 @@ export default function App({ Component, state }: PageProps) {
         <Partial name="body">
           <Component />
         </Partial>
-         <PlayerWidget />
+        <PlayerWidget />
       </body>
     </html>
   );

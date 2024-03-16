@@ -25,7 +25,7 @@ export default function MarkerRow({ marker }: MarkerRowProps) {
   // if (marker.tracks && !marker.tracks.artists) {
   //   console.log(marker)
   // }
-  const [artist, track] = (marker.rawTrack).split(" - ");
+  const [artist, track] = marker.rawTrack.split(" - ");
   return (
     <div>
       <TrackRow

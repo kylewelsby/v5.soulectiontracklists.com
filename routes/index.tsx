@@ -5,7 +5,7 @@ export default async function HomePage() {
   const show = await fetchShow("HEAD");
   return (
     <>
-      <RadioHero show={show}/>
+      <RadioHero show={show} />
     </>
-  )
+  );
 }

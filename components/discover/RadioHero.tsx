@@ -5,7 +5,7 @@ import Artwork from "@/components/Artwork.tsx";
 interface Props {
   show: Show;
 }
-export default function RadioHero({show}: Props ) {
+export default function RadioHero({ show }: Props) {
   const href = `/tracklists/${show.slug}`;
 
   return (

@@ -17,9 +17,11 @@ export default async function TracklistsPage(_req: Request, ctx: RouteContext) {
       <div class="container mx-auto px-5">
         <TracklistsNav />
         <h2>All Tracklists</h2>
-        {shows.map((tracklist: Show) => <TracklistCard
-          tracklist={tracklist}
-        />)}
+        {shows.map((tracklist: Show) => (
+          <TracklistCard
+            tracklist={tracklist}
+          />
+        ))}
       </div>
     </>
   );

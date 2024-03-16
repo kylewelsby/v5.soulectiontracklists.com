@@ -21,7 +21,9 @@ export default async function TracklistsPage(_req: Request, ctx: RouteContext) {
   });
 
   const shows = await fetchTracklists(ctx.params.tag);
-  const title = i18next.t(`filter.titles.${ctx.params.tag}`, {count: shows.length}) || "Tracklists";
+  const title =
+    i18next.t(`filter.titles.${ctx.params.tag}`, { count: shows.length }) ||
+    "Tracklists";
 
   return (
     <>

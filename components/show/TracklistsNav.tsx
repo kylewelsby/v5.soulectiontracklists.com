@@ -15,5 +15,5 @@ export default function TracklistsNav() {
       </SiteSubNavLink>
       <SiteSubNavLink href="/tracklists/t/specials/">Specials</SiteSubNavLink>
     </SiteSubNav>
-  )
+  );
 }
