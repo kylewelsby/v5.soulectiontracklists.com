@@ -27,7 +27,6 @@ export default function PlayerWidget() {
 
   const marker = queue.currentMarker;
 
-  console.debug("Player Open?", queue.canPlay);
 
   const toggleClass = show ? "translate-y-0" : "translate-y-full";
   const classNames = `
