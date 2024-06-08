@@ -12,6 +12,7 @@ import * as $tracklists_t_tag_ from "./routes/tracklists/t/[tag].tsx";
 import * as $tracks_id_ from "./routes/tracks/[id].tsx";
 import * as $PlayShow from "./islands/PlayShow.tsx";
 import * as $PlayerWidget from "./islands/PlayerWidget.tsx";
+import * as $SiteNav from "./islands/SiteNav.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -28,6 +29,7 @@ const manifest = {
   islands: {
     "./islands/PlayShow.tsx": $PlayShow,
     "./islands/PlayerWidget.tsx": $PlayerWidget,
+    "./islands/SiteNav.tsx": $SiteNav,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

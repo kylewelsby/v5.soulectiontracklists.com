@@ -2,7 +2,7 @@ import { PageProps } from "$fresh/server.ts";
 
 import { asset, Partial } from "$fresh/runtime.ts";
 
-import SiteNav from "@/components/Site/SiteNav.tsx";
+import SiteNav from "@/islands/SiteNav.tsx";
 import PlayerWidget from "@/islands/PlayerWidget.tsx";
 
 export default function App({ Component, state }: PageProps) {

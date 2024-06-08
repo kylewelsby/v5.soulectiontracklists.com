@@ -17,6 +17,7 @@ export default async function Tracklist(_req: Request, ctx: RouteContext) {
       <TracklistHero show={show} />
       <div class="bg-black">
         <div class="container mx-auto p-4 py-8">
+          <h2 class="text-4xl font-bold mt-20 mb-8">Tracklist</h2>
           {show.chapters.map((chapter) => (
             <ChapterRow
               chapter={chapter}
