@@ -13,7 +13,7 @@ export default function App({ Component, state }: PageProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Soulection</title>
         <link rel="icon" href={asset("/favicon.ico")} type="image/x-icon" />
-        <link rel="preconnect" href="https://ik.imagekit.io" />
+        <link rel="preconnect" href="https://cdn.soulectiontracklists.com" />
         <link rel="stylesheet" href="/styles.css" />
       </head>
       <body f-client-nav>
