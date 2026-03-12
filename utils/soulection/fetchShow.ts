@@ -1,129 +1,100 @@
-import { pool } from "@/utils/db.ts";
+import { readJSON } from "@/utils/data.ts";
 import { Show, ShowLinks, SoundcloudTranscoding } from "@/utils/types.ts";
 import { render } from "$gfm";
 import { timeToSeconds } from "@/utils/timeToSeconds.ts";
 import fetchTracklists from "@/utils/soulection/fetchTracklists.ts";
+
+interface V4Show {
+  id: string;
+  slug: string;
+  title: string;
+  artwork: string;
+  content: string;
+  publishedAt?: string;
+  published_at?: string;
+  location?: string;
+  links: { soundcloud?: string; appleMusic?: string; mixcloud?: string };
+  chapters: V4Chapter[];
+}
+
+interface V4Chapter {
+  id: string;
+  title: string;
+  artwork: string | null;
+  content: string | null;
+  markers: V4Marker[];
+}
+
+interface V4Marker {
+  id: string;
+  position: number;
+  timestamp: string;
+  rawTrack: string;
+  track: {
+    id: string;
+    title: string;
+    artwork: string | null;
+    artist: { id: string; title: string; slug: string };
+  } | null;
+}
 
 export default async function fetchShow(slug: string): Promise<Show> {
   if (slug === "HEAD") {
     const tracklists = await fetchTracklists();
     slug = tracklists[0].slug;
   }
-  const trackQuery = `SELECT
-    tracks.id,
-    tracks.title,
-    tracks.artwork,
-    json_build_object(
-      'id', a.id,
-      'title', a.title
-    ) as artists
-  FROM tracks
-  INNER JOIN artists a ON tracks.artist = a.id`;
 
-  const markersQuery = `SELECT json_agg(
-    json_build_object(
-      'id', m.id,
-      'timestamp', m.timestamp,
-      'rawTrack', m."rawTrack",
-      'position', m.position,
-      'tracks', json_build_object(
-        'id', t.id,
-        'title', t.title,
-        'artwork', t.artwork,
-        'artists', t.artists
-      )
-    )
-  ) FROM markers m
-  LEFT JOIN (${trackQuery}) AS t ON t.id = m.track
-  WHERE m.chapter = c.id`;
+  const v4 = await readJSON<V4Show>(`shows/${slug}.json`);
+  const publishedAt = v4.published_at || v4.publishedAt || "";
 
-  const query = `SELECT
-  s.id,
-  s.title,
-  s.slug,
-  s.published_at,
-  s.links,
-  s.artwork,
-  s.location,
-  s.content,
-  json_agg(
-    json_build_object(
-      'id', c.id,
-      'title', c.title,
-      'artwork', c.artwork,
-      'content', c.content,
-      'markers',
-      (${markersQuery})
-    )
-  ) AS chapters
-FROM shows s
-JOIN chapters c ON s.id = c.show AND c."position" = 0
-JOIN markers m ON c.id = m.chapter AND m."position" = 0
-WHERE s.slug = $SLUG AND s.profile = $PROFILE
-GROUP BY s.id, m."position", c."position"
-ORDER BY m."position" ASC, c."position" ASC`;
-  const connection = await pool.connect();
-  let result;
-  try {
-    const logLabel = `🗃️ 'fetchShow' Query took`;
-    console.time(logLabel);
-    result = await connection.queryObject<Show>({
-      text: query,
-      args: {
-        slug: slug,
-        profile: "QiEFFErt688",
-      },
-    });
-    console.timeEnd(logLabel);
-  } finally {
-    connection.release();
-  }
+  const excerpt = (v4.content || "").split("<!--more-->")[0].trim();
+  const formattedDate = new Intl.DateTimeFormat("en-US", {
+    dateStyle: "long",
+  }).format(Date.parse(publishedAt));
 
-  const show = result.rows[0];
+  const chapters = (v4.chapters || []).map((chapter) => ({
+    id: chapter.id,
+    title: chapter.title,
+    artwork: chapter.artwork || "",
+    content: render(chapter.content || ""),
+    markers: (chapter.markers || [])
+      .sort((a, b) => a.position - b.position)
+      .map((marker) => ({
+        id: marker.id,
+        timestamp: marker.timestamp,
+        position: marker.position,
+        msTimestamp: timeToSeconds(marker.timestamp),
+        rawTrack: marker.rawTrack,
+        tracks: marker.track
+          ? {
+              id: marker.track.id,
+              title: marker.track.title,
+              artwork: marker.track.artwork || "",
+              artists: marker.track.artist,
+            }
+          : undefined,
+      })),
+  }));
 
-  const excerpt = show.content.split("<!--more-->")[0].trim();
-  show.excerpt = render(excerpt)
-    .replace(/<a /g, "<span ")
-    .replace(/<\/a>/g, "</span>");
-
-  const formattedDate = new Intl.DateTimeFormat("en-US", { dateStyle: "long" })
-    .format(Date.parse(show.published_at));
-  show.formattedDate = formattedDate;
-
-  let chapters = show.chapters.map((chapter) => {
-    chapter.content = render(chapter.content);
-    return chapter;
-  });
-  chapters = chapters.map((chapter) => {
-    chapter.markers!.sort((a, b) => {
-      if (a.position > b.position) return 1;
-      if (a.position < b.position) return -1;
-      return 0;
-    }).map((marker) => {
-      marker.msTimestamp = timeToSeconds(marker.timestamp);
-      return marker;
-    });
-    return chapter;
-  });
-  show.chapters = chapters;
-  return show;
+  return {
+    title: v4.title,
+    slug: v4.slug,
+    artwork: v4.artwork,
+    content: v4.content,
+    published_at: publishedAt,
+    location: v4.location || "",
+    links: v4.links as ShowLinks,
+    formattedDate,
+    excerpt: render(excerpt)
+      .replace(/<a /g, "<span ")
+      .replace(/<\/a>/g, "</span>"),
+    chapters,
+  } as Show;
 }
 
 export async function fetchShowLinks(slug: string): Promise<ShowLinks> {
-  const connection = await pool.connect();
-  let result;
-  try {
-    result = await connection.queryObject<Show>(`SELECT
-      shows.links
-      FROM shows
-      WHERE
-        shows.slug = '${slug}'
-        AND shows.profile = 'QiEFFErt688'
-    `);
-  } finally {
-    connection.release();
-  }
-  return result.rows[0].links;
+  const v4 = await readJSON<V4Show>(`shows/${slug}.json`);
+  return v4.links as ShowLinks;
 }
 
 export async function fetchMedia(soundcloudUrl: string): Promise<string> {
@@ -141,8 +112,6 @@ export async function fetchMedia(soundcloudUrl: string): Promise<string> {
   });
   let media;
   if (respResolver) {
-    // console.log(respResolver.media.transcodings);
-    // let mediaUrl = respResolver.media.transcodings.find((t: SoundcloudTranscoding) => t.format.protocol === "hls" && t.format.mime_type === "audio/mpeg")?.url
     let mediaUrl = respResolver.media.transcodings.find(
       (t: SoundcloudTranscoding) =>
         t.format.protocol === "progressive" &&

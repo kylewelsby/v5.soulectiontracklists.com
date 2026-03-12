@@ -5,7 +5,7 @@ import TracklistCard from "@/components/TracklistCard.tsx";
 import TracklistsNav from "@/components/show/TracklistsNav.tsx";
 import { Show } from "@/utils/types.ts";
 
-import enTranslation from "@/locale/en.json" assert {
+import enTranslation from "@/locale/en.json" with {
   type: "json",
 };
 import { Head } from "$fresh/runtime.ts";

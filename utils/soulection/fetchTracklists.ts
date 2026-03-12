@@ -1,46 +1,52 @@
-import { pool } from "@/utils/db.ts";
+import { readJSON } from "@/utils/data.ts";
 import { Show } from "@/utils/types.ts";
 import { render } from "$gfm";
 
-export default async function fetchTracklists(
-  tagsRaw?: string,
-): Promise<Show[]> {
-  let tags = (tagsRaw || "").split(",").map(
-    (tag: string): number | number[] | undefined => {
-      if (tag === "guest") return 11;
-      if (tag === "soulection-radio") return 15;
-      if (tag === "takeover") return 5;
-      if (tag === "all-dayer") return 19;
-      if (tag === "specials") return [10, 19, 12];
-    },
-  ).flatMap((num) => num).filter((tag) => {
-    return Number.isInteger(tag);
-  }) as number[];
+interface V4ShowListItem {
+  id: string;
+  title: string;
+  slug: string;
+  artwork: string;
+  content: string;
+  tags: number[];
+  published_at: string;
+  links: { soundcloud?: string; appleMusic?: string; mixcloud?: string };
+}
 
-  if (tags.length === 0) {
-    tags = [15, 19];
-  }
-  const query = `SELECT title, published_at, tags, slug, artwork, content
-  FROM shows
-  WHERE tags && ARRAY[${tags.join(",")}]
-  AND state = 'published'
-  ORDER BY published_at DESC
-  LIMIT 50`;
-  const connection = await pool.connect();
-  let result;
-  try {
-    const logLabel = `🗃️ 'fetchTracklists' Query took`;
-    console.time(logLabel);
-    result = await connection.queryObject<Show>(query);
-    console.timeEnd(logLabel);
-  } finally {
-    connection.release();
-  }
-  return result.rows.map((show) => {
+interface V4ShowsByTag {
+  shows: V4ShowListItem[];
+  count: number;
+  totalCount: number;
+  tag: { id: number; name: string };
+}
+
+const TAG_MAP: Record<string, string> = {
+  guest: "guest",
+  "soulection-radio": "soulection-radio",
+  takeover: "takeover",
+  "all-dayer": "soulection-radio",
+  specials: "discord",
+};
+
+export default async function fetchTracklists(
+  tag?: string,
+): Promise<Show[]> {
+  const tagFile = TAG_MAP[tag || ""] || "soulection-radio";
+  const data = await readJSON<V4ShowsByTag>(`shows-by-tag/${tagFile}.json`);
+
+  return data.shows.slice(0, 50).map((show) => {
     const excerpt = show.content.split("<!--more-->")[0].trim();
-    show.excerpt = render(excerpt)
-      .replace(/<a /g, "<span ")
-      .replace(/<\/a>/g, "</span>");
-    return show;
+    return {
+      title: show.title,
+      slug: show.slug,
+      artwork: show.artwork,
+      content: show.content,
+      tags: show.tags,
+      published_at: show.published_at,
+      links: show.links,
+      excerpt: render(excerpt)
+        .replace(/<a /g, "<span ")
+        .replace(/<\/a>/g, "</span>"),
+    } as Show;
   });
 }

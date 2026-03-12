@@ -1,4 +1,4 @@
-import data from "iso3166-2-db" assert { type: "json" };
+import data from "iso3166-2-db" with { type: "json" };
 
 export default function locationByISOCode(code = "") {
   const [iso1, iso2] = code.split("-");
